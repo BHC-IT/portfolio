@@ -1,0 +1,39 @@
+#pageArea {
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	position: absolute;
+	background-color: #00000000;
+	display: none;
+}
+
+#tutoRestart {
+	display: none;
+	z-index: 10;
+	position: absolute;
+	left: 10vw;
+	top: 0.1vh;
+}
+
+#tutoRestart p {
+	color: white;
+	font-family: monospace;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+@media only screen and (max-device-width: 768px) {
+	#tutoRestart {
+		left: 75vw;
+	}
+	#tutoRestart p {
+		font-size: 1.8rem;
+	}
+}

@@ -1,0 +1,229 @@
+.tutoArea {
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	position: absolute;
+	background-color: #00000080;
+}
+
+.textZone {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	font-size: 1.5rem;
+	font-family: Comfortaa-light;
+	/*font-family: Futurist;*/
+	/*font-family: LemonMilk-light;*/
+	/*font-family: Roboto-light;*/
+}
+
+.ButtonRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	z-index: 5;
+}
+
+.buttonKey {
+	margin:0.5vh;
+	filter: invert(50%) sepia(1%) saturate(0%) hue-rotate(90deg) brightness(89%) contrast(88%);
+}
+
+.buttonKeyActive {
+	margin: 0.7vh;
+}
+
+.NextButton {
+	display: flex;
+	position: absolute;
+	bottom: 15vh;
+	right: 5vw;
+	align-items: center;
+	justify-content: center;
+}
+
+#nextButtonTouchable {
+	background-color: gray;
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left:3vw;
+	padding-right: 3vw;
+	border-radius:5%;
+	cursor: pointer;
+	font-size: 1.2rem;
+	color: white;
+	font-family: monospace;
+}
+
+@media only screen and (max-device-width: 768px) {
+	.textZone {
+		display: flex;
+		flex-direction: column;
+		width: 80%;
+		justify-content: center;
+		align-items: center;
+		color: white;
+		font-size: 2.5rem;
+		font-family: monospace;
+	}
+
+	.NextButton {
+		display: flex;
+		position: absolute;
+		bottom: 5vh;
+		right: 10vw;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#nextButtonTouchable {
+		background-color: gray;
+		padding-top: 1px;
+		padding-bottom: 1px;
+		padding-left:3vw;
+		padding-right: 3vw;
+		border-radius:5%;
+		cursor: pointer;
+		font-size: 1.5rem;
+		color: white;
+		font-family: monospace;
+	}
+
+	.handMoveUp {
+		position: absolute;
+		bottom: 35vh;
+		animation:
+			startUp 1s ease alternate,
+			up 1s ease 1s alternate;
+	}
+
+	.handMoveDown {
+		position: absolute;
+		bottom: 15vh;
+		animation:
+			startDown 1s ease alternate,
+			down 1s ease 1s alternate;
+	}
+
+	.handMoveRight {
+		position: absolute;
+		bottom: 35vh;
+		right: 40vw;
+		animation:
+			startRight 1s ease alternate,
+			Right 1s ease 1s alternate;
+	}
+
+	.handStayRight {
+		position: absolute;
+		bottom: 35vh;
+		right: 40vw;
+	}
+
+	.handMoveLeft {
+		position: absolute;
+		bottom: 35vh;
+		right: 60vw;
+		animation:
+			startLeft 1s ease alternate,
+			Left 1s ease 1s alternate;
+	}
+
+	.handStayLeft {
+		position: absolute;
+		bottom: 35vh;
+		right: 60vw;
+	}
+
+	@keyframes startUp {
+		0% {
+			bottom: 15vh;
+			transform: scale(1.5);
+		}
+		100% {
+			bottom: 15vh;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes up {
+		0% {
+			bottom: 15vh;
+		}
+		100% {
+			bottom: 35vh;
+		}
+	}
+
+	@keyframes startDown {
+		0% {
+			bottom: 35vh;
+			transform: scale(1.5);
+		}
+		100% {
+			bottom: 35vh;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes down {
+		0% {
+			bottom: 35vh;
+		}
+		100% {
+			bottom: 15vh;
+		}
+	}
+
+	@keyframes startRight {
+		0% {
+			right:60vw;
+			transform: scale(1.5);
+		}
+		100% {
+			right:60vw;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes Right {
+		0% {
+			right:60vw;
+		}
+		100% {
+			right:40vw;
+		}
+	}
+
+	@keyframes startLeft {
+		0% {
+			right:40vw;
+			transform: scale(1.5);
+		}
+		100% {
+			right:40vw;
+			transform: scale(1);
+		}
+	}
+
+	@keyframes Left {
+		0% {
+			right:40vw;
+		}
+		100% {
+			right:60vw;
+		}
+	}
+}

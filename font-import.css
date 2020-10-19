@@ -1,0 +1,29 @@
+@font-face {
+	font-family: "Comfortaa-light";
+	src: url("/Assets/Fonts/Comfortaa/Comfortaa-Light.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Comfortaa-bold";
+	src: url("/Assets/Fonts/Comfortaa/Comfortaa-Bold.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Comfortaa-light";
+	src: url("/Assets/Fonts/Comfortaa/Comfortaa-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Futurist";
+	src: url("/Assets/Fonts/Futurist/FUTRFW.TTF") format("truetype");
+}
+
+@font-face {
+	font-family: "LemonMilk-light";
+	src: url("/Assets/Fonts/LemonMilk/LEMONMILK-Light.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Roboto-light";
+	src: url("/Assets/Fonts/Roboto/Roboto-Light.ttf") format("truetype");
+}
