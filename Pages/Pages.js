@@ -92,11 +92,34 @@ class Pages {
 			this.pages[2].colorLine = interpolateAuthAPILine;
 
 			this.pages[3] = {};
-			this.pages[3].name = 'Contact';
-			this.pages[3].page = await loadPage('/Pages/screens/Contact.html');
-			// this.pages[3]._more = await loadPage('/Pages/screens/Contact_more.html');
-			this.pages[3].colorDot = interpolateContact;
-			this.pages[3].colorLine = interpolateContactLine;
+			this.pages[3].name = 'Auth API 2';
+			this.pages[3].page = await loadPage('/Pages/screens/BhcAuth.html');
+			this.pages[3]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
+			this.pages[3].colorDot = interpolateAuthAPI;
+			this.pages[3].colorLine = interpolateAuthAPILine;
+
+
+			this.pages[4] = {};
+			this.pages[4].name = 'Auth API 3';
+			this.pages[4].page = await loadPage('/Pages/screens/BhcAuth.html');
+			this.pages[4]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
+			this.pages[4].colorDot = interpolateAuthAPI;
+			this.pages[4].colorLine = interpolateAuthAPILine;
+
+
+			this.pages[5] = {};
+			this.pages[5].name = 'Auth API 4';
+			this.pages[5].page = await loadPage('/Pages/screens/BhcAuth.html');
+			this.pages[5]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
+			this.pages[5].colorDot = interpolateAuthAPI;
+			this.pages[5].colorLine = interpolateAuthAPILine;
+
+			this.pages[6] = {};
+			this.pages[6].name = 'Contact';
+			this.pages[6].page = await loadPage('/Pages/screens/Contact.html');
+			this.pages[6]._more = null;
+			this.pages[6].colorDot = interpolateContact;
+			this.pages[6].colorLine = interpolateContactLine;
 
 		} catch (e) {
 			console.error(e);
@@ -144,6 +167,7 @@ class Pages {
 }
 
 startRotate = (angle) => {
+	roulette.render();
 	roulette.displaySelected();
 	if (!rotating) {
 		cloud.angle = angle;

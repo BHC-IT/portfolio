@@ -11,31 +11,12 @@ class Roulette {
 			this.pageAnchor.innerHTML = e;
 			this.rouletteAnchor = document.getElementById('roulette');
 
-			pages.pages.forEach(e => {
-				this.rouletteAnchor.innerHTML += 	`<div class="pageHolder" >
-										<p id="${e.name}" class="pageName" >${e.name}${ e._more ? `<p id="${e.name}more" class="more" >/more</p>` : '' }</p>
-									</div>`
-			});
-
-			const texts = document.getElementsByClassName('pageName');
-
-			for (let i = 0; i < texts.length; i++) {
-				texts[i].onclick = this.handleclick;
-			}
-
-			const mores = document.getElementsByClassName('more');
-
-			for (let i = 0; i < mores.length; i++) {
-				mores[i].onclick = this.handleclickmore;
-			}
-
-			this.displaySelected();
+			this.render();
 		})
 
 	}
 
 	handleclick = (event) => {
-		console.log('here');
 		if (this.actualSelected) document.getElementById(this.actualSelected).className = 'pageName';
 		if (this.onMore) document.getElementById(this.actualSelected+'more').className = 'pageName';
 
@@ -59,6 +40,7 @@ class Roulette {
 		else if (prev_i > i) startRotate([moving_factor, 0, 0]);
 		else startRotate([0, -moving_factor, 0]);
 
+		this.render();
 		setTimeout(() => this.pages.render(), 2000);
 	}
 
@@ -87,6 +69,7 @@ class Roulette {
 		else if (prev_i > i) startRotate([moving_factor, 0, 0]);
 		else startRotate([0, moving_factor, 0]);
 
+		this.render();
 		setTimeout(() => this.pages.render(), 2000);
 	}
 
@@ -113,5 +96,35 @@ class Roulette {
 
 	mount = async () => {
 		this.pageAnchor.style.display = 'flex';
+	}
+
+	render = () => {
+
+		this.rouletteAnchor.innerHTML = '';
+
+		this.pages.pages.forEach((e, i) => {
+			if (i > this.pages.i - 3 && i < this.pages.i + 3 || this.pages.i < 2 && i < 5 || this.pages.i > this.pages.pages.length - 3 && i >= this.pages.pages.length - 5) {
+				this.rouletteAnchor.innerHTML += `
+					<div class="pageHolder" >
+						<p id="${e.name}" class="pageName" >${e.name}${ e._more ? `<p id="${e.name}more" class="more" >/more</p>` : '' }</p>
+					</div>
+				`
+			}
+		});
+
+		const texts = document.getElementsByClassName('pageName');
+
+		for (let i = 0; i < texts.length; i++) {
+			texts[i].onclick = this.handleclick;
+		}
+
+		const mores = document.getElementsByClassName('more');
+
+		for (let i = 0; i < mores.length; i++) {
+			mores[i].onclick = this.handleclickmore;
+		}
+
+		this.displaySelected();
+
 	}
 }
