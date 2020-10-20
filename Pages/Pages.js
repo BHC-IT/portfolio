@@ -54,6 +54,54 @@ interpolateBKCLine = (e1, e2, {height, width, deep}) => {
 	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
 }
 
+interpolateArya = (e, {height, width, deep}) => {
+	const value = e[2] / deep;
+
+	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)})`;
+}
+
+interpolateAryaLine = (e1, e2, {height, width, deep}) => {
+	const value = e1[2] / deep;
+
+	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)})`;
+}
+
+interpolateBLC = (e, {height, width, deep}) => {
+	const value = e[2] / deep;
+
+	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)})`;
+}
+
+interpolateBLCLine = (e1, e2, {height, width, deep}) => {
+	const value = e1[2] / deep;
+
+	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)})`;
+}
+
+interpolateScalability = (e, {height, width, deep}) => {
+	const value = e[0] / width;
+
+	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)})`;
+}
+
+interpolateScalabilityLine = (e1, e2, {height, width, deep}) => {
+	const value = e1[0] / width;
+
+	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)})`;
+}
+
+interpolateJ4 = (e, {height, width, deep}) => {
+	const value = e[1] / height;
+
+	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)})`;
+}
+
+interpolateJ4Line = (e1, e2, {height, width, deep}) => {
+	const value = e1[1] / height;
+
+	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)})`;
+}
+
 interpolateContact = (e, {height, width, deep}) => {
 	const value = e[2] / deep;
 
@@ -115,30 +163,30 @@ class Pages {
 			this.pages[4].name = 'Arya mobile App';
 			this.pages[4].page = await loadPage('/Pages/screens/Arya.html');
 			this.pages[4]._more = await loadPage('/Pages/screens/Arya_more.html');
-			this.pages[4].colorDot = interpolateAuthAPI;
-			this.pages[4].colorLine = interpolateAuthAPILine;
+			this.pages[4].colorDot = interpolateArya;
+			this.pages[4].colorLine = interpolateAryaLine;
 
 
 			this.pages[5] = {};
 			this.pages[5].name = 'BLC - BFC';
 			this.pages[5].page = await loadPage('/Pages/screens/BLC_BFC.html');
 			this.pages[5]._more = await loadPage('/Pages/screens/BLC_BFC_more.html');
-			this.pages[5].colorDot = interpolateAuthAPI;
-			this.pages[5].colorLine = interpolateAuthAPILine;
+			this.pages[5].colorDot = interpolateBLC;
+			this.pages[5].colorLine = interpolateBLCLine;
 
 			this.pages[6] = {};
-			this.pages[6].name = 'Project : Horizontal Server Scalability';
+			this.pages[6].name = 'Project : Automated distribution';
 			this.pages[6].page = await loadPage('/Pages/screens/ServerScalability.html');
 			this.pages[6]._more = await loadPage('/Pages/screens/ServerScalability_more.html');
-			this.pages[6].colorDot = interpolateAuthAPI;
-			this.pages[6].colorLine = interpolateAuthAPILine;
+			this.pages[6].colorDot = interpolateScalability;
+			this.pages[6].colorLine = interpolateScalabilityLine;
 
 			this.pages[7] = {};
 			this.pages[7].name = 'In Dev : J4';
 			this.pages[7].page = await loadPage('/Pages/screens/J4.html');
 			this.pages[7]._more = await loadPage('/Pages/screens/J4_more.html');
-			this.pages[7].colorDot = interpolateAuthAPI;
-			this.pages[7].colorLine = interpolateAuthAPILine;
+			this.pages[7].colorDot = interpolateJ4;
+			this.pages[7].colorLine = interpolateJ4Line;
 
 			this.pages[8] = {};
 			this.pages[8].name = 'Contact';

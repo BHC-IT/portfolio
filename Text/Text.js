@@ -123,6 +123,9 @@ function mobileText(callback, skip) {
 
 	dummyEnd.onStart = () => {
 		animation();
+		keyZone.style.display = 'none';
+		nextButton.style.display = 'none';
+
 		document.removeEventListener('keydown', handleKeyDown);
 		callback();
 	}
@@ -253,6 +256,8 @@ function desktopText(callback, skip) {
 
 	dummyEnd.onStart = () => {
 		leftKey.className = 'buttonKey';
+		keyZone.style.display = 'none';
+		nextButton.style.display = 'none';
 
 		document.removeEventListener('keydown', handleKeyDown);
 		callback();
