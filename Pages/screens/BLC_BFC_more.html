@@ -1,0 +1,104 @@
+<div id="mainSpace" >
+	<img src='./Assets/Images/OAuth_logo.png' id="OAuthLogo" alt="OAuthLogo">
+	<div id="textSpaceLeft" >
+		<p>Optimise and automate distribution.</p>
+		<p>Our goal is to normalize the use of distribution by simplifying it.</p>
+		<p>We will add a paquet manager to C++.</p>
+	</div>
+
+	<div id="textSpaceRight" >
+		<p>Build with TypeScript and mongoDB, the API offer a fast and scalable way to sign-in user. OAuth2 is currently the only protocol supported, but more are to come.</p>
+		<p>Tests, linting, deployment and feedback are entirely automated with GitHub actions. Regression or potential failure can't go unnoticed.</p>
+		<p>A configuration file can be given to set-up each node in a specific way. Furthermore, most features can have their rules overloaded by another service for specific needs.</p>
+	</div>
+
+</div>
+
+<style type="text/css">
+	#mainSpace {
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#OAuthLogo {
+		background-color: #080808af;
+		border-radius: 10vh;
+		z-index: 255;
+
+		position: absolute;
+
+		height: 15vh;
+
+		animation: enter 0.5s ease-in-out;
+	}
+
+	#textSpaceLeft {
+		position: absolute;
+		height: 100%;
+		width: 33%;
+
+		top: 0vh;
+		left: 0vw;
+
+		background-color: #080808af;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		animation: enter 0.5s ease-in-out;
+	}
+
+	#textSpaceLeft p {
+		color: #c0c0c0;
+
+		padding-right: 2vw;
+		padding-left: 2vw;
+
+		font-family: Comfortaa-light;
+		font-size: 1.1rem;
+	}
+
+	#textSpaceRight {
+		position: absolute;
+		height: 100%;
+		width: 33%;
+
+		top: 0vh;
+		right: 0vw;
+
+		background-color: #080808af;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		animation: enter 0.5s ease-in-out;
+	}
+
+	#textSpaceRight p {
+		color: #c0c0c0;
+
+		padding-right: 2vw;
+		padding-left: 2vw;
+
+		font-family: Comfortaa-light;
+		font-size: 1.1rem;
+	}
+
+	@keyframes enter {
+		0% {
+			opacity: 0;
+			transform: scale(0);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+</style>

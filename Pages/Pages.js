@@ -100,26 +100,40 @@ class Pages {
 
 
 			this.pages[4] = {};
-			this.pages[4].name = 'Auth API 3';
-			this.pages[4].page = await loadPage('/Pages/screens/BhcAuth.html');
-			this.pages[4]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
+			this.pages[4].name = 'Arya mobile App';
+			this.pages[4].page = await loadPage('/Pages/screens/Arya.html');
+			this.pages[4]._more = await loadPage('/Pages/screens/Arya_more.html');
 			this.pages[4].colorDot = interpolateAuthAPI;
 			this.pages[4].colorLine = interpolateAuthAPILine;
 
 
 			this.pages[5] = {};
-			this.pages[5].name = 'Auth API 4';
-			this.pages[5].page = await loadPage('/Pages/screens/BhcAuth.html');
-			this.pages[5]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
+			this.pages[5].name = 'BLC - BFC';
+			this.pages[5].page = await loadPage('/Pages/screens/BLC_BFC.html');
+			this.pages[5]._more = await loadPage('/Pages/screens/BLC_BFC_more.html');
 			this.pages[5].colorDot = interpolateAuthAPI;
 			this.pages[5].colorLine = interpolateAuthAPILine;
 
 			this.pages[6] = {};
-			this.pages[6].name = 'Contact';
-			this.pages[6].page = await loadPage('/Pages/screens/Contact.html');
-			this.pages[6]._more = null;
-			this.pages[6].colorDot = interpolateContact;
-			this.pages[6].colorLine = interpolateContactLine;
+			this.pages[6].name = 'Project : Horizontal Server Scalability';
+			this.pages[6].page = await loadPage('/Pages/screens/ServerScalability.html');
+			this.pages[6]._more = await loadPage('/Pages/screens/ServerScalability_more.html');
+			this.pages[6].colorDot = interpolateAuthAPI;
+			this.pages[6].colorLine = interpolateAuthAPILine;
+
+			this.pages[7] = {};
+			this.pages[7].name = 'In Dev : J4';
+			this.pages[7].page = await loadPage('/Pages/screens/J4.html');
+			this.pages[7]._more = await loadPage('/Pages/screens/J4_more.html');
+			this.pages[7].colorDot = interpolateAuthAPI;
+			this.pages[7].colorLine = interpolateAuthAPILine;
+
+			this.pages[8] = {};
+			this.pages[8].name = 'Contact';
+			this.pages[8].page = await loadPage('/Pages/screens/Contact.html');
+			this.pages[8]._more = null;
+			this.pages[8].colorDot = interpolateContact;
+			this.pages[8].colorLine = interpolateContactLine;
 
 		} catch (e) {
 			console.error(e);
