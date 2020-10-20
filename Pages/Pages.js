@@ -33,13 +33,13 @@ interpolateDosismartLine = (e1, e2, {height, width}) => {
 interpolateAuthAPI = (e, {height, width, deep}) => {
 	const value = e[2] / deep;
 
-	return `rgb(${interpolate(0xff, 0x11, value)}, ${interpolate(0xff, 0x24, value)}, ${interpolate(0xff, 0x9f, value)})`;
+	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
 }
 
 interpolateAuthAPILine = (e1, e2, {height, width, deep}) => {
 	const value = e1[2] / deep;
 
-	return `rgb(${interpolate(0xff, 0x11, value)}, ${interpolate(0xff, 0x24, value)}, ${interpolate(0xff, 0x9f, value)})`;
+	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
 }
 
 interpolateContact = (e, {height, width, deep}) => {
