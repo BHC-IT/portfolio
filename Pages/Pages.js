@@ -42,6 +42,18 @@ interpolateAuthAPILine = (e1, e2, {height, width, deep}) => {
 	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
 }
 
+interpolateBKC = (e, {height, width, deep}) => {
+	const value = e[2] / deep;
+
+	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
+}
+
+interpolateBKCLine = (e1, e2, {height, width, deep}) => {
+	const value = e1[2] / deep;
+
+	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
+}
+
 interpolateContact = (e, {height, width, deep}) => {
 	const value = e[2] / deep;
 
@@ -92,11 +104,11 @@ class Pages {
 			this.pages[2].colorLine = interpolateAuthAPILine;
 
 			this.pages[3] = {};
-			this.pages[3].name = 'Auth API 2';
-			this.pages[3].page = await loadPage('/Pages/screens/BhcAuth.html');
-			this.pages[3]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
-			this.pages[3].colorDot = interpolateAuthAPI;
-			this.pages[3].colorLine = interpolateAuthAPILine;
+			this.pages[3].name = 'BKC';
+			this.pages[3].page = await loadPage('/Pages/screens/BKC.html');
+			this.pages[3]._more = await loadPage('/Pages/screens/BKC_more.html');
+			this.pages[3].colorDot = interpolateBKC;
+			this.pages[3].colorLine = interpolateBKCLine;
 
 
 			this.pages[4] = {};
@@ -284,23 +296,25 @@ handleKeyDown = (event) => {
 	}
 }
 
-var lastY;
-var startY;
+let lastY = 0;
+let startY = 0;
 
-var lastX;
-var startX;
+let lastX = 0;
+let startX = 0;
 
 handleTouchstart = (e) => {
-	var currentY = e.changedTouches[0].screenY;
-	var currentX = e.changedTouches[0].screenX;
+	let currentY = e.changedTouches[0].screenY;
+	let currentX = e.changedTouches[0].screenX;
 
 	startY = currentY;
 	startX = currentX;
+	lastY = currentY;
+	lastX = currentX;
 }
 
 handleTouchmove = (e) => {
-	var currentY = e.changedTouches[0].screenY;
-	var currentX = e.changedTouches[0].screenX;
+	let currentY = e.changedTouches[0].screenY;
+	let currentX = e.changedTouches[0].screenX;
 
 	lastY = currentY;
 	lastX = currentX;
@@ -324,6 +338,25 @@ handleTouchend = (e) => {
 	} else if ( lastX < startX - resiliance ) {
 
 		pageRight(pages);
+
+	}
+}
+
+let lastScrollY = 0;
+let startScrollY = 0;
+
+handleScroll = (event) => {
+	lastScrollY += event.deltaY;
+
+	if (lastScrollY > 0) {
+
+		pageDown(pages);
+		lastScrollY = 0;
+
+	} else if (lastScrollY < 0) {
+
+		pageUp(pages);
+		lastScrollY = 0;
 
 	}
 }
@@ -353,6 +386,8 @@ initPaginer = async () => {
 
 	document.addEventListener('touchend', handleTouchend);
 
+	document.onwheel = handleScroll;
+
 
 	document.getElementsByClassName('tutoArea')[0].style.display = 'none';
 
@@ -365,6 +400,8 @@ initPaginer = async () => {
 		document.removeEventListener('touchstart', handleTouchstart);
 		document.removeEventListener('touchmove', handleTouchmove);
 		document.removeEventListener('touchend', handleTouchend);
+
+		document.onwheel = () => {};
 
 		startText(initPaginer, true);
 	};
