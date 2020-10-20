@@ -282,23 +282,25 @@ handleKeyDown = (event) => {
 	}
 }
 
-var lastY;
-var startY;
+let lastY = 0;
+let startY = 0;
 
-var lastX;
-var startX;
+let lastX = 0;
+let startX = 0;
 
 handleTouchstart = (e) => {
-	var currentY = e.changedTouches[0].screenY;
-	var currentX = e.changedTouches[0].screenX;
+	let currentY = e.changedTouches[0].screenY;
+	let currentX = e.changedTouches[0].screenX;
 
 	startY = currentY;
 	startX = currentX;
+	lastY = currentY;
+	lastX = currentX;
 }
 
 handleTouchmove = (e) => {
-	var currentY = e.changedTouches[0].screenY;
-	var currentX = e.changedTouches[0].screenX;
+	let currentY = e.changedTouches[0].screenY;
+	let currentX = e.changedTouches[0].screenX;
 
 	lastY = currentY;
 	lastX = currentX;
@@ -322,6 +324,25 @@ handleTouchend = (e) => {
 	} else if ( lastX < startX - resiliance ) {
 
 		pageRight(pages);
+
+	}
+}
+
+let lastScrollY = 0;
+let startScrollY = 0;
+
+handleScroll = (event) => {
+	lastScrollY += event.deltaY;
+
+	if (lastScrollY > 0) {
+
+		pageDown(pages);
+		lastScrollY = 0;
+
+	} else if (lastScrollY < 0) {
+
+		pageUp(pages);
+		lastScrollY = 0;
 
 	}
 }
@@ -351,6 +372,8 @@ initPaginer = async () => {
 
 	document.addEventListener('touchend', handleTouchend);
 
+	document.onwheel = handleScroll;
+
 
 	document.getElementsByClassName('tutoArea')[0].style.display = 'none';
 
@@ -363,6 +386,8 @@ initPaginer = async () => {
 		document.removeEventListener('touchstart', handleTouchstart);
 		document.removeEventListener('touchmove', handleTouchmove);
 		document.removeEventListener('touchend', handleTouchend);
+
+		document.onwheel = () => {};
 
 		startText(initPaginer, true);
 	};

@@ -19,6 +19,7 @@ function startAnimation(hand, animation) {
 	});
 }
 
+
 function mobileText(callback, skip) {
 	const textZone = document.getElementsByClassName('textZone')[0];
 	const keyZone = document.getElementsByClassName('ButtonKeyboardShow')[0];
@@ -63,6 +64,15 @@ function mobileText(callback, skip) {
 		time: 1,
 		space: textZone,
 	});
+
+	const handleKeyDown = (event) => {
+		if (event.keyCode == 13 || event.keyCode == 32) {
+			if (current)
+				current.supp();
+			if (next)
+				next.write();
+		}
+	}
 
 	welcomeText.onFinish = () => {
 		setTimeout(() => {
@@ -113,6 +123,7 @@ function mobileText(callback, skip) {
 
 	dummyEnd.onStart = () => {
 		animation();
+		document.removeEventListener('keydown', handleKeyDown);
 		callback();
 	}
 
@@ -129,6 +140,8 @@ function mobileText(callback, skip) {
 		if (next)
 			next.write();
 	}
+
+	document.addEventListener('keydown', handleKeyDown);
 
 	if (skip) moveText.write();
 	else setTimeout(() => welcomeText.write(), 750);
@@ -179,6 +192,15 @@ function desktopText(callback, skip) {
 		time: 1,
 		space: textZone,
 	});
+
+	const handleKeyDown = (event) => {
+		if (event.keyCode == 13 || event.keyCode == 32) {
+			if (current)
+				current.supp();
+			if (next)
+				next.write();
+		}
+	}
 
 	welcomeText.onFinish = () => {
 		setTimeout(() => {
@@ -232,6 +254,7 @@ function desktopText(callback, skip) {
 	dummyEnd.onStart = () => {
 		leftKey.className = 'buttonKey';
 
+		document.removeEventListener('keydown', handleKeyDown);
 		callback();
 	}
 
@@ -248,6 +271,8 @@ function desktopText(callback, skip) {
 		if (next)
 			next.write();
 	}
+
+	document.addEventListener('keydown', handleKeyDown);
 
 	if (skip) moveText.write();
 	else setTimeout(() => welcomeText.write(), 750);
