@@ -1,15 +1,15 @@
 <div id="mainSpace" >
-	<img src='./Assets/Images/defaultPage_dosismart.png' id="DosismartLogo" alt="DosismartLogo">
+	<img src='./Assets/Images/Blockchain.png' id="BlockchainLogo" alt="BlockchainLogo">
 	<div id="textSpaceLeft" >
-		<p>Dosismart is build with the help of <a href="https://dosimex.fr" style="color:grey">dosimex</a>. They kindly share with us their physics and nuclear engineering background.</p>
-		<p>Dosimex, as a excel based software, already have a huge adoption in the french industrie. We build on this to add modern features: historics, import/export, user group and more.</p>
-		<p>The application is the first mobile solution to modelise gamma ray exposition.</p>
-		<p>We are currently in private beta and we will release a public beta soon.</p>
+		<p>BKC was build for monkey money. The goal was to give french local money association the ability to digitalise their monney.</p>
+		<p>The association owner needed to run the chaine nodes on cheap machines, and could register huge spike on specific days without the possibility to scale. We thinked BKC just for that, beeing as low consuming as possible will handling large amount of transaction at the same time.</p>
+		<p>Also, association had only a few Desktop to spare to serve as node for the chain. If one nodes crashed, it could mean a huge loss in capacity for them. The software was made to handle any bad that could happen, as long as the PC is running.</p>
 	</div>
 
 	<div id="textSpaceRight" >
-		<p>The project is build with a microservice architecture. Most services are build in typescript, with c++ modules binded with node-gyp. The physics calculus service is build in Haskell.</p>
-		<p>All front application (mobile app, landing page, dashboard) are build with react.</p>
+		<p>Build from scratch in C++ with an actor model, BKC is heavily optimised to run on multi-core CPU and can handle high load efficiently.</p>
+		<p>Knowing the chain would be run in private environnement, we used a lazy approach to transaction, allowing thousands of request to be handled by the chain.</p>
+		<p>Using strict concurrency model such as actor and pi calculus, the process can recover from anything and will, at worse, delay treatment</p>
 	</div>
 
 </div>
@@ -24,7 +24,7 @@
 		justify-content: center;
 	}
 
-	#DosismartLogo {
+	#BlockchainLogo {
 		background-color: #080808af;
 		z-index: 255;
 

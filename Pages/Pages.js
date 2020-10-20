@@ -42,6 +42,18 @@ interpolateAuthAPILine = (e1, e2, {height, width, deep}) => {
 	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
 }
 
+interpolateBKC = (e, {height, width, deep}) => {
+	const value = e[2] / deep;
+
+	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
+}
+
+interpolateBKCLine = (e1, e2, {height, width, deep}) => {
+	const value = e1[2] / deep;
+
+	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
+}
+
 interpolateContact = (e, {height, width, deep}) => {
 	const value = e[2] / deep;
 
@@ -92,11 +104,11 @@ class Pages {
 			this.pages[2].colorLine = interpolateAuthAPILine;
 
 			this.pages[3] = {};
-			this.pages[3].name = 'Auth API 2';
-			this.pages[3].page = await loadPage('/Pages/screens/BhcAuth.html');
-			this.pages[3]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
-			this.pages[3].colorDot = interpolateAuthAPI;
-			this.pages[3].colorLine = interpolateAuthAPILine;
+			this.pages[3].name = 'BKC';
+			this.pages[3].page = await loadPage('/Pages/screens/BKC.html');
+			this.pages[3]._more = await loadPage('/Pages/screens/BKC_more.html');
+			this.pages[3].colorDot = interpolateBKC;
+			this.pages[3].colorLine = interpolateBKCLine;
 
 
 			this.pages[4] = {};
