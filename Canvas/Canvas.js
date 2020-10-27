@@ -1,4 +1,5 @@
 var cloud = null;
+var canvasReady = false;
 
 interpolate = (min, max, value) => {
 
@@ -55,4 +56,4 @@ function startCanvas() {
 	window.onresize = sizeCanva;
 }
 
-const canvasReady = true;
+canvasReady = true;

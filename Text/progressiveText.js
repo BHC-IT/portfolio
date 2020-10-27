@@ -11,11 +11,15 @@ class progressiveText {
 
 		this.i = 0;
 
+		this.render = this.render.bind(this);
+		this.supp = this.supp.bind(this);
+		this.write = this.write.bind(this);
+
 		this.onStart = () => {};
 		this.onFinish = () => {};
 	}
 
-	render = () => {
+	render() {
 		this.to_write += this.text[this.i];
 		this.space.innerHTML = `<p>${this.to_write}</p>`
 		this.i++;
@@ -25,11 +29,11 @@ class progressiveText {
 			this.onFinish();
 	}
 
-	supp = () => {
+	supp() {
 		this.space.innerHTML = '<p></p>';
 	}
 
-	write = () => {
+	write() {
 		if (this.onStart)
 			this.onStart();
 		this.render();

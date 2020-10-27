@@ -82,7 +82,7 @@
 	.NextButton {
 		display: flex;
 		position: absolute;
-		bottom: 5vh;
+		bottom: 10vh;
 		right: 10vw;
 		align-items: center;
 		justify-content: center;

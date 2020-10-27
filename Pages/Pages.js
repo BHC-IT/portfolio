@@ -1,114 +1,115 @@
 let pages = null;
 let roulette = null;
+var pagesReady = false;
 
-interpolate = (min, max, value) => {
+function interpolate(min, max, value) {
 
 	return (max - min) * value + min;
 }
 
-interpolateBHC = (e, {height, width}) => {
+function interpolateBHC(e, {height, width}) {
 	const value = e[1] / height;
 
 	return `rgb(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)})`;
 }
 
-interpolateBHCLine = (e1, e2, {height, width}) => {
+function interpolateBHCLine(e1, e2, {height, width}) {
 	const value = e1[1] / height;
 
 	return `rgb(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)})`;
 }
 
-interpolateDosismart = (e, {height, width}) => {
+function interpolateDosismart(e, {height, width}) {
 	const value = e[0] / width;
 
 	return `rgb(${interpolate(0x9f, 0x32, value)}, ${interpolate(0xe5, 0x5f, value)}, ${interpolate(0xba, 0x84, value)})`;
 }
 
-interpolateDosismartLine = (e1, e2, {height, width}) => {
+function interpolateDosismartLine(e1, e2, {height, width}) {
 	const value = e1[0] / width;
 
 	return `rgb(${interpolate(0x9f, 0x32, value)}, ${interpolate(0xe5, 0x5f, value)}, ${interpolate(0xba, 0x84, value)})`;
 }
 
-interpolateAuthAPI = (e, {height, width, deep}) => {
+function interpolateAuthAPI(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
 	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
 }
 
-interpolateAuthAPILine = (e1, e2, {height, width, deep}) => {
+function interpolateAuthAPILine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
 	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
 }
 
-interpolateBKC = (e, {height, width, deep}) => {
+function interpolateBKC(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
 	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
 }
 
-interpolateBKCLine = (e1, e2, {height, width, deep}) => {
+function interpolateBKCLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
 	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
 }
 
-interpolateArya = (e, {height, width, deep}) => {
+function interpolateArya(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
 	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)})`;
 }
 
-interpolateAryaLine = (e1, e2, {height, width, deep}) => {
+function interpolateAryaLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
 	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)})`;
 }
 
-interpolateBLC = (e, {height, width, deep}) => {
+function interpolateBLC(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
 	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)})`;
 }
 
-interpolateBLCLine = (e1, e2, {height, width, deep}) => {
+function interpolateBLCLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
 	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)})`;
 }
 
-interpolateScalability = (e, {height, width, deep}) => {
+function interpolateScalability(e, {height, width, deep}) {
 	const value = e[0] / width;
 
 	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)})`;
 }
 
-interpolateScalabilityLine = (e1, e2, {height, width, deep}) => {
+function interpolateScalabilityLine(e1, e2, {height, width, deep}) {
 	const value = e1[0] / width;
 
 	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)})`;
 }
 
-interpolateJ4 = (e, {height, width, deep}) => {
+function interpolateJ4(e, {height, width, deep}) {
 	const value = e[1] / height;
 
 	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)})`;
 }
 
-interpolateJ4Line = (e1, e2, {height, width, deep}) => {
+function interpolateJ4Line(e1, e2, {height, width, deep}) {
 	const value = e1[1] / height;
 
 	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)})`;
 }
 
-interpolateContact = (e, {height, width, deep}) => {
+function interpolateContact(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
 	return `rgb(${interpolate(0xc0, 0x32, value)}, ${interpolate(0xc0, 0x5f, value)}, ${interpolate(0xc0, 0x84, value)})`;
 }
 
-interpolateContactLine = (e1, e2, {height, width, deep}) => {
+function interpolateContactLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
 	return `rgb(${interpolate(0xc0, 0x32, value)}, ${interpolate(0xc0, 0x5f, value)}, ${interpolate(0xc0, 0x84, value)})`;
@@ -123,10 +124,18 @@ class Pages {
 		this.i = 0;
 		this._more = false;
 
+		this.loadPages = this.loadPages.bind(this);
+		this.next = this.next.bind(this);
+		this.prev = this.prev.bind(this);
+		this.more = this.more.bind(this);
+		this.less = this.less.bind(this);
+		this.unmount = this.unmount.bind(this);
+		this.render = this.render.bind(this);
+
 		this.tuto = tuto;
 	}
 
-	loadPages = async () => {
+	async loadPages() {
 		try {
 			this.pages = [];
 
@@ -240,7 +249,7 @@ class Pages {
 	}
 }
 
-startRotate = (angle) => {
+function startRotate(angle) {
 	roulette.render();
 	roulette.displaySelected();
 	if (!rotating) {
@@ -253,7 +262,7 @@ startRotate = (angle) => {
 	}
 }
 
-stopRotate = () => {
+function stopRotate() {
 	cloud.angle = [0,0,0];
 	cloud.rotDot(false);
 	setTimeout(() => cloud.moveDot(true), 500);
@@ -261,7 +270,7 @@ stopRotate = () => {
 
 const moving_factor = 0.02;
 
-pageUp = (pages) => {
+function pageUp(pages) {
 	if (pages.i === 0) return;
 
 
@@ -278,7 +287,7 @@ pageUp = (pages) => {
 	rotating = true;
 }
 
-pageDown = (pages) => {
+function pageDown(pages) {
 	if (pages.i >= pages.pages.length - 1) return;
 
 	pages.unmount();
@@ -294,7 +303,7 @@ pageDown = (pages) => {
 	rotating = true;
 }
 
-pageLeft = (pages) => {
+function pageLeft(pages) {
 	if (!pages.less()) return;
 
 	pages.unmount();
@@ -309,7 +318,7 @@ pageLeft = (pages) => {
 	rotating = true;
 }
 
-pageRight = (pages) => {
+function pageRight(pages) {
 	if (!pages.more()) return;
 
 	pages.unmount();
@@ -324,7 +333,7 @@ pageRight = (pages) => {
 	rotating = true;
 }
 
-handleKeyDown = (event) => {
+function handleKeyDown(event) {
 	if (event.keyCode == 37) { // left
 
 		pageLeft(pages);
@@ -350,7 +359,7 @@ let startY = 0;
 let lastX = 0;
 let startX = 0;
 
-handleTouchstart = (e) => {
+function handleTouchstart(e) {
 	let currentY = e.changedTouches[0].screenY;
 	let currentX = e.changedTouches[0].screenX;
 
@@ -360,7 +369,7 @@ handleTouchstart = (e) => {
 	lastX = currentX;
 }
 
-handleTouchmove = (e) => {
+function handleTouchmove(e) {
 	let currentY = e.changedTouches[0].screenY;
 	let currentX = e.changedTouches[0].screenX;
 
@@ -368,7 +377,7 @@ handleTouchmove = (e) => {
 	lastX = currentX;
 }
 
-handleTouchend = (e) => {
+function handleTouchend(e) {
 	const resiliance = window.innerHeight / 20;
 
 	if (lastY > startY + resiliance) {
@@ -393,7 +402,7 @@ handleTouchend = (e) => {
 let lastScrollY = 0;
 let startScrollY = 0;
 
-handleScroll = (event) => {
+function handleScroll(event) {
 	lastScrollY += event.deltaY;
 
 	if (lastScrollY > 0) {
@@ -409,7 +418,7 @@ handleScroll = (event) => {
 	}
 }
 
-initPaginer = async () => {
+async function initPaginer() {
 
 	localStorage.setItem('tuto', 'done');
 
@@ -455,4 +464,4 @@ initPaginer = async () => {
 	};
 };
 
-const pagesReady = true;
+pagesReady = true;

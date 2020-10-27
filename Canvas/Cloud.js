@@ -37,6 +37,19 @@ class Cloud {
 
 		this.angle = [0,0,0];
 
+		this.initCalculateDotMoveNext = this.initCalculateDotMoveNext.bind(this);
+		this.initRotateGrid = this.initRotateGrid.bind(this);
+		this.calculateDotMoveNext = this.calculateDotMoveNext.bind(this);
+		this.rotateGrid = this.rotateGrid.bind(this);
+		this.drawDot = this.drawDot.bind(this);
+		this.drawLines = this.drawLines.bind(this);
+		this.moveDot = this.moveDot.bind(this);
+		this.rotDot = this.rotDot.bind(this);
+		this.renderDots = this.renderDots.bind(this);
+		this.renderLines = this.renderLines.bind(this);
+		this.draw = this.draw.bind(this);
+		this.render = this.render.bind(this);
+
 
 		for (let i = 0; i < this.dot_nb; i++) {
 			this.arr.push([
@@ -56,7 +69,7 @@ class Cloud {
 		}
 	}
 
-	initCalculateDotMoveNext = () => {
+	initCalculateDotMoveNext() {
 		const gpu = new GPU();
 
 		return gpu.createKernel(function(prev_pos, height, width, deep) {
@@ -89,7 +102,7 @@ class Cloud {
 		}).setOutput([6, this.dot_nb]);
 	}
 
-	initRotateGrid = () => {
+	initRotateGrid() {
 		const gpu = new GPU();
 
 		return gpu.createKernel(function(prev_pos, height, width, deep, deltaAngle) {
@@ -173,31 +186,31 @@ class Cloud {
 		}).setOutput([6, this.dot_nb]);
 	}
 
-	calculateDotMoveNext = () => {
+	calculateDotMoveNext() {
 		this.arr = this.calc_move_dot(this.arr, this.height, this.width, this.deep);
 	}
 
-	rotateGrid = () => {
+	rotateGrid() {
 		this.arr = this.calc_rotation_dot(this.arr, this.height, this.width, this.deep, this.angle);
 	}
 
-	drawDot = (state) => {
+	drawDot(state) {
 		this.draw_dot = state;
 	}
 
-	drawLines = (state) => {
+	drawLines(state) {
 		this.draw_lines = state;
 	}
 
-	moveDot = (state) => {
+	moveDot(state) {
 		this.move_dot = state;
 	}
 
-	rotDot = (state) => {
+	rotDot(state) {
 		this.rot_dot = state;
 	}
 
-	renderDots = () => {
+	renderDots() {
 		this.arr.forEach(e => {
 			const fin_color = this.color_dot(e, {height: this.height, width: this.width, deep: this.deep});
 
@@ -211,7 +224,7 @@ class Cloud {
 		});
 	}
 
-	renderLines = () => {
+	renderLines() {
 		this.ctx.lineWidth = this.line_width;
 		this.lines.forEach(e => {
 
@@ -239,7 +252,7 @@ class Cloud {
 		});
 	}
 
-	draw = () => {
+	draw() {
 		if (this.move_dot)
 			this.calculateDotMoveNext();
 
@@ -271,7 +284,7 @@ class Cloud {
 
 	}
 
-	render = () => {
+	render() {
 		this.draw();
 		window.requestAnimationFrame(this.render);
 	}

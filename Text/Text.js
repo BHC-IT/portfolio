@@ -1,3 +1,4 @@
+var textReady = false;
 
 function startAnimation(hand, animation) {
 	let animationOngoing = true;
@@ -48,7 +49,7 @@ function mobileText(callback, skip) {
 	});
 
 	const moreText = new progressiveText({
-		text: 'If a project interest you, swipe left to learn more',
+		text: 'If a project interests you, swipe left to learn more',
 		time: 1000,
 		space: textZone,
 	});
@@ -179,7 +180,7 @@ function desktopText(callback, skip) {
 	});
 
 	const moreText = new progressiveText({
-		text: 'If a project interest you, use the right key to learn more',
+		text: 'If a project interests you, use the right key to learn more',
 		time: 1000,
 		space: textZone,
 	});
@@ -291,4 +292,5 @@ function startText(callback, skip = false) {
 	else desktopText(callback, skip);
 }
 
-const textReady = true;
+
+textReady = true;

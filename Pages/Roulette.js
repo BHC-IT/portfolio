@@ -7,6 +7,13 @@ class Roulette {
 		this.actualSelected = null;
 		this.onMore = false;
 
+		this.handleclick = this.handleclick.bind(this);
+		this.handleclickmore = this.handleclickmore.bind(this);
+		this.displaySelected = this.displaySelected.bind(this);
+		this.unmount = this.unmount.bind(this);
+		this.mount = this.mount.bind(this);
+		this.render = this.render.bind(this);
+
 		loadPage('/Pages/Roulette.html').then((e) => {
 			this.pageAnchor.innerHTML = e;
 			this.rouletteAnchor = document.getElementById('roulette');
@@ -16,7 +23,7 @@ class Roulette {
 
 	}
 
-	handleclick = (event) => {
+	handleclick(event) {
 		if (this.actualSelected) document.getElementById(this.actualSelected).className = 'pageName';
 		if (this.onMore) document.getElementById(this.actualSelected+'more').className = 'pageName';
 
@@ -44,7 +51,7 @@ class Roulette {
 		setTimeout(() => this.pages.render(), 2000);
 	}
 
-	handleclickmore = (event) => {
+	handleclickmore(event) {
 		if (this.actualSelected) document.getElementById(this.actualSelected).className = 'pageName';
 		if (this.onMore) document.getElementById(this.actualSelected+'more').className = 'pageName';
 
@@ -73,7 +80,7 @@ class Roulette {
 		setTimeout(() => this.pages.render(), 2000);
 	}
 
-	displaySelected = () => {
+	displaySelected() {
 		if (this.actualSelected) document.getElementById(this.actualSelected).className = 'pageName';
 		if (this.onMore) document.getElementById(this.actualSelected+'more').className = 'pageName';
 		this.onMore = false;
@@ -90,15 +97,15 @@ class Roulette {
 		this.actualSelected = id;
 	}
 
-	unmount = () => {
+	unmount() {
 		this.pageAnchor.style.display = 'none';
 	}
 
-	mount = async () => {
+	async mount() {
 		this.pageAnchor.style.display = 'flex';
 	}
 
-	render = () => {
+	render() {
 
 		this.rouletteAnchor.innerHTML = '';
 
