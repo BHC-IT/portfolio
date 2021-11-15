@@ -28,7 +28,7 @@ function startCanvas() {
 		width: 1920,
 		deep: 1080,
 		dotNumber: (window.innerWidth * window.innerHeight * 0.0001) | 0,
-		dotSpeed: 1,
+		dotSpeed: 0.3,
 		dotSize: 3,
 		linesLength: 200,
 		colorDot: interpolateBHC,

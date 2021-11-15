@@ -75,6 +75,39 @@ function mobileText(callback, skip) {
 		}
 	}
 
+	let lastY = 0;
+	let startY = 0;
+
+	let lastX = 0;
+	let startX = 0;
+
+	function handleTouchstart(e) {
+		let currentY = e.changedTouches[0].screenY;
+		let currentX = e.changedTouches[0].screenX;
+
+		startY = currentY;
+		startX = currentX;
+		lastY = currentY;
+		lastX = currentX;
+	}
+
+	function handleTouchmove(e) {
+		let currentY = e.changedTouches[0].screenY;
+		let currentX = e.changedTouches[0].screenX;
+
+		lastY = currentY;
+		lastX = currentX;
+	}
+
+	function handleTouchend(e) {
+		const resiliance = window.innerHeight / 20;
+
+		if (current)
+			current.supp();
+		if (next)
+			next.write();
+	}
+
 	welcomeText.onFinish = () => {
 		setTimeout(() => {
 			welcomeText.supp();
@@ -146,6 +179,9 @@ function mobileText(callback, skip) {
 	}
 
 	document.addEventListener('keydown', handleKeyDown);
+	document.addEventListener('touchstart', handleTouchstart);
+	document.addEventListener('touchmove', handleTouchmove);
+	document.addEventListener('touchend', handleTouchend);
 
 	if (skip) moveText.write();
 	else setTimeout(() => welcomeText.write(), 750);
@@ -198,12 +234,10 @@ function desktopText(callback, skip) {
 	});
 
 	const handleKeyDown = (event) => {
-		if (event.keyCode == 13 || event.keyCode == 32) {
-			if (current)
-				current.supp();
-			if (next)
-				next.write();
-		}
+		if (current)
+			current.supp();
+		if (next)
+			next.write();
 	}
 
 	welcomeText.onFinish = () => {
@@ -279,6 +313,10 @@ function desktopText(callback, skip) {
 	}
 
 	document.addEventListener('keydown', handleKeyDown);
+	document.addEventListener('touchstart', handleTouchstart);
+	document.addEventListener('touchmove', handleTouchmove);
+	document.addEventListener('touchend', handleTouchend);
+
 
 	if (skip) moveText.write();
 	else setTimeout(() => welcomeText.write(), 750);

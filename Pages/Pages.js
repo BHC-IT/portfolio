@@ -255,10 +255,10 @@ function startRotate(angle) {
 	if (!rotating) {
 		cloud.angle = angle;
 		cloud.moveDot(false);
-		setTimeout(() => {
+//		setTimeout(() => {
 			cloud.rotDot(true)
 			setTimeout(stopRotate, 1000);
-		}, 500);
+//		}, 500);
 	}
 }
 

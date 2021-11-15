@@ -56,9 +56,10 @@ class Cloud {
 				Math.random() * this.width,
 				Math.random() * this.height,
 				Math.random() * this.deep,
-				(Math.random() * this.dot_speed) - 0.5 / this.dot_speed,
-				(Math.random() * this.dot_speed) - 0.5 / this.dot_speed,
-				(Math.random() * this.dot_speed) - 0.5 / this.dot_speed]);
+				((Math.random() * this.dot_speed) - (this.dot_speed / 2)),
+				((Math.random() * this.dot_speed) - (this.dot_speed / 2)),
+				((Math.random() * this.dot_speed) - (this.dot_speed / 2))
+			]);
 		}
 
 
