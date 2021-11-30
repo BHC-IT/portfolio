@@ -2,117 +2,185 @@ let pages = null;
 let roulette = null;
 var pagesReady = false;
 
+const max_length = 200;
+const fullDraw = 190;
+
+const maxWidth = window.innerWidth;
+const maxHeight = window.innerHeight;
+const maxDeep = window.innerHeight;
+
+const margeWidth = 20;
+const margeHeight = 20;
+const margeDeep = 20;
+
+const margeRight = maxWidth - margeWidth;
+const margeDown = maxHeight - margeHeight;
+const margeProf = maxDeep - margeDeep;
+
 function interpolate(min, max, value) {
 
 	return (max - min) * value + min;
 }
 
+function opacMargePoint(e, {height, width}) {
+
+	const opacTable = [
+		interpolate(1, 0, (margeWidth - e[0]) / margeWidth),
+		interpolate(1, 0,  (e[0] - (margeRight)) / margeWidth),
+		interpolate(1, 0, (margeHeight - e[1]) / margeHeight),
+		interpolate(1, 0,  (e[1] - (margeDown)) / margeHeight),
+		interpolate(1, 0, (margeDeep - e[2]) / margeDeep),
+		interpolate(1, 0,  (e[2] - (margeProf)) / margeDeep),
+	].filter((e) => e >= 0 && e <= 1)
+
+	const margeValue = opacTable.length ? Math.min(...opacTable) : 1
+
+	return `${margeValue > 0 ? margeValue : 0}`
+}
+
+
+function opacLine(e1, e2, {height, width}) {
+	const distance = Math.sqrt( Math.pow(e1[0] - e2[0], 2) + Math.pow(e1[1] - e2[1], 2) + Math.pow(e1[2] - e2[2], 2))
+
+	const opacTable = [
+		interpolate(1, 0, (margeWidth - e1[0]) / margeWidth),
+		interpolate(1, 0,  (e1[0] - (margeRight)) / margeWidth),
+		interpolate(1, 0, (margeWidth - e2[0]) / margeWidth),
+		interpolate(1, 0,  (e2[0] - (margeRight)) / margeWidth),
+
+		interpolate(1, 0, (margeHeight - e1[1]) / margeHeight),
+		interpolate(1, 0,  (e1[1] - (margeDown)) / margeHeight),
+		interpolate(1, 0, (margeHeight - e2[1]) / margeHeight),
+		interpolate(1, 0,  (e2[1] - (margeDown)) / margeHeight),
+
+		interpolate(1, 0, (margeDeep - e1[2]) / margeDeep),
+		interpolate(1, 0,  (e1[2] - (margeProf)) / margeDeep),
+		interpolate(1, 0, (margeDeep - e2[2]) / margeDeep),
+		interpolate(1, 0,  (e2[2] - (margeProf)) / margeDeep),
+	].filter((e) => e >= 0 && e <= 1)
+
+	const margeValue = opacTable.length ? Math.min(...opacTable) : 100
+
+	if (margeValue < 0)
+		margeValue = 0;
+
+	const valueOp = distance < fullDraw ? 0 : (distance - fullDraw)/(max_length - fullDraw)
+	const distanceOpac = interpolate(1, 0, valueOp);
+
+	if (distanceOpac < 0)
+		distanceOpac = 0;
+
+	const finalOpac = distanceOpac < margeValue ? distanceOpac : margeValue
+
+	return `${finalOpac < 0 ? 0 : finalOpac}`
+}
+
 function interpolateBHC(e, {height, width}) {
 	const value = e[1] / height;
 
-	return `rgb(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)})`;
+	return `rgba(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateBHCLine(e1, e2, {height, width}) {
 	const value = e1[1] / height;
 
-	return `rgb(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)})`;
+	return `rgba(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateDosismart(e, {height, width}) {
 	const value = e[0] / width;
 
-	return `rgb(${interpolate(0x9f, 0x32, value)}, ${interpolate(0xe5, 0x5f, value)}, ${interpolate(0xba, 0x84, value)})`;
+	return `rgb(${interpolate(0x9f, 0x32, value)}, ${interpolate(0xe5, 0x5f, value)}, ${interpolate(0xba, 0x84, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateDosismartLine(e1, e2, {height, width}) {
 	const value = e1[0] / width;
 
-	return `rgb(${interpolate(0x9f, 0x32, value)}, ${interpolate(0xe5, 0x5f, value)}, ${interpolate(0xba, 0x84, value)})`;
+	return `rgb(${interpolate(0x9f, 0x32, value)}, ${interpolate(0xe5, 0x5f, value)}, ${interpolate(0xba, 0x84, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateAuthAPI(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
-	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
+	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateAuthAPILine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
-	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)})`;
+	return `rgb(${interpolate(0xff, 0x26, value)}, ${interpolate(0xff, 0x4a, value)}, ${interpolate(0xff, 0x75, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateBKC(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
-	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
+	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateBKCLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
-	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)})`;
+	return `rgb(${interpolate(0x02, 0x32, value)}, ${interpolate(0x85, 0x5f, value)}, ${interpolate(0xa1, 0x84, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateArya(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
-	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)})`;
+	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateAryaLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
-	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)})`;
+	return `rgb(${interpolate(0xe1, 0xff, value)}, ${interpolate(0x00, 0xff, value)}, ${interpolate(0x15, 0xff, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateBLC(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
-	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)})`;
+	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateBLCLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
-	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)})`;
+	return `rgb(${interpolate(0xb2, 0x5f, value)}, ${interpolate(0x22, 0x42, value)}, ${interpolate(0x22, 0xf4, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateScalability(e, {height, width, deep}) {
 	const value = e[0] / width;
 
-	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)})`;
+	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateScalabilityLine(e1, e2, {height, width, deep}) {
 	const value = e1[0] / width;
 
-	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)})`;
+	return `rgb(${interpolate(0x19, 0x68, value)}, ${interpolate(0x8f, 0xbb, value)}, ${interpolate(0x9d, 0xc4, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateJ4(e, {height, width, deep}) {
 	const value = e[1] / height;
 
-	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)})`;
+	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateJ4Line(e1, e2, {height, width, deep}) {
 	const value = e1[1] / height;
 
-	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)})`;
+	return `rgb(${interpolate(0xca, 0x81, value)}, ${interpolate(0x8f, 0x5b, value)}, ${interpolate(0x2f, 0x1e, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 function interpolateContact(e, {height, width, deep}) {
 	const value = e[2] / deep;
 
-	return `rgb(${interpolate(0xc0, 0x32, value)}, ${interpolate(0xc0, 0x5f, value)}, ${interpolate(0xc0, 0x84, value)})`;
+	return `rgb(${interpolate(0xc0, 0x32, value)}, ${interpolate(0xc0, 0x5f, value)}, ${interpolate(0xc0, 0x84, value)}, ${opacMargePoint(e, {height, width})})`;
 }
 
 function interpolateContactLine(e1, e2, {height, width, deep}) {
 	const value = e1[2] / deep;
 
-	return `rgb(${interpolate(0xc0, 0x32, value)}, ${interpolate(0xc0, 0x5f, value)}, ${interpolate(0xc0, 0x84, value)})`;
+	return `rgb(${interpolate(0xc0, 0x32, value)}, ${interpolate(0xc0, 0x5f, value)}, ${interpolate(0xc0, 0x84, value)}, ${opacLine(e1, e2, {height, width})})`;
 }
 
 class Pages {

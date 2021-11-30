@@ -1,3 +1,31 @@
+var test = 0;
+const test_max = 60;
+
+function calculate_lines(arr, distance) {
+	const lines = [];
+	arr.forEach((e, i) => {
+		for (let j = i + 1; j != arr.length; j++) {
+			const to_point = arr[j];
+
+			const x_abs = e[0] - to_point[0];
+			const y_abs = e[1] - to_point[1];
+			const z_abs = e[2] - to_point[2];
+
+
+			const curr_distance = Math.sqrt((x_abs * x_abs) + (y_abs * y_abs) + (z_abs * z_abs));
+
+
+			if (curr_distance < distance && i !== j) {
+				lines.push([i, j]);
+			} else {
+			}
+
+		}
+	});
+
+	return lines;
+}
+
 class Cloud {
 	constructor({canvas, height, deep, width, dotNumber, dotSpeed, dotSize, linesLength, colorDot, colorLine, colorBack, lineWidth}) {
 
@@ -58,16 +86,12 @@ class Cloud {
 				Math.random() * this.deep,
 				((Math.random() * this.dot_speed) - (this.dot_speed / 2)),
 				((Math.random() * this.dot_speed) - (this.dot_speed / 2)),
-				((Math.random() * this.dot_speed) - (this.dot_speed / 2))
+				this.deep ? ((Math.random() * this.dot_speed) - (this.dot_speed / 2)) : 0
 			]);
 		}
 
 
-		this.linesCalc = new Worker('./Canvas/Lines.js');
-
-		this.linesCalc.onmessage = (e) => {
-			this.lines = e.data;
-		}
+		this.linesCalc = calculate_lines;
 	}
 
 	initCalculateDotMoveNext() {
@@ -217,8 +241,8 @@ class Cloud {
 
 			this.ctx.fillStyle = fin_color;
 			this.ctx.strokeStyle = fin_color;
-			const size_deep = this.dot_size;
-			this.ctx.arc(e[0], e[1], 2 * size_deep * 0.1 * Math.PI, 0, 2 * Math.PI);
+			const size_deep = this.dot_size - (this.dot_size * (e[2] / this.deep));
+			this.ctx.arc(e[0], e[1], 2 * (size_deep >= 0 ? size_deep : 0) * 0.1 * Math.PI, 0, 2 * Math.PI);
 			this.ctx.fill();
 			this.ctx.stroke();
 			this.ctx.beginPath();
@@ -227,15 +251,11 @@ class Cloud {
 
 	renderLines() {
 		this.ctx.lineWidth = this.line_width;
-		this.lines.forEach(e => {
+		this.lines.forEach((e, i) => {
 
 			const coord1 = this.arr[e[0]];
 			const coord2 = this.arr[e[1]];
 
-			const fin_color = this.color_line(coord1, coord2, {height: this.height, width: this.width, deep: this.deep});
-
-			this.ctx.fillStyle = fin_color;
-			this.ctx.strokeStyle = fin_color;
 
 			const x_abs = coord1[0] - coord2[0];
 			const y_abs = coord1[1] - coord2[1];
@@ -244,8 +264,14 @@ class Cloud {
 
 			const curr_distance = Math.sqrt((x_abs * x_abs) + (y_abs * y_abs) + (z_abs * z_abs));
 
+
 			if (curr_distance > this.lines_length) return;
 
+			const fin_color = this.color_line(coord1, coord2, {height: this.height, width: this.width, deep: this.deep});
+
+			this.ctx.fillStyle = fin_color;
+			this.ctx.strokeStyle = fin_color;
+			this.ctx.lineWidth = 1 - (coord1[2] / this.deep)
 			this.ctx.moveTo(coord1[0], coord1[1]);
 			this.ctx.lineTo(coord2[0], coord2[1]);
 			this.ctx.stroke();
@@ -260,7 +286,7 @@ class Cloud {
 		if (this.rot_dot)
 			this.rotateGrid();
 
-		this.linesCalc.postMessage({arr: this.arr, length: this.lines_length});
+		this.lines = this.linesCalc(this.arr, this.lines_length);
 
 		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
 		this.ctx.beginPath();
@@ -286,7 +312,10 @@ class Cloud {
 	}
 
 	render() {
+		test++;
 		this.draw();
 		window.requestAnimationFrame(this.render);
+		if (test > test_max)
+			test = 0;
 	}
 }

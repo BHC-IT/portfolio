@@ -14,8 +14,12 @@ interpolateBHC = (e, props) => {
 
 interpolateBHCLine = (e1, e2, {height, width}) => {
 	const value = e1[1] / height;
+	const distance = Math.sqrt( Math.pow(e1[0] - e2[0], 2) + Math.pow(e1[1] - e2[1], 2) + Math.pow(e1[2] - e2[2], 2))
 
-	return `rgb(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)})`;
+	if (e[0] < 50)
+		console.log("here");
+
+	return `rgba(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)}, ${distance / 200})`;
 }
 
 function startCanvas() {
@@ -24,11 +28,12 @@ function startCanvas() {
 
 	cloud = new Cloud({
 		canvas: ctx,
-		height: 1080,
-		width: 1920,
-		deep: 1080,
-		dotNumber: (window.innerWidth * window.innerHeight * 0.0001) | 0,
-		dotSpeed: 0.3,
+		height: window.innerHeight,
+		width: window.innerWidth,
+		deep: window.innerHeight,
+		dotNumber: (window.innerWidth * window.innerHeight * 0.00012) | 0,
+//		dotNumber: 100,
+		dotSpeed: 0.4,
 		dotSize: 3,
 		linesLength: 200,
 		colorDot: interpolateBHC,
