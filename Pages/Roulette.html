@@ -1,15 +1,22 @@
-<div id="roulette" >
+<div id="containerRoulette" >
+	<div id="roulette" >
+	</div>
 </div>
 
 <style type="text/css">
+
+	#containerRoulette {
+		position: absolute;
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		left: 1vw;
+	}
 
 	#roulette {
 		display: flex;
 		flex-direction: column;
 		z-index: 10;
-		position: absolute;
-		left: 1vw;
-		top: 1vh;
 		background-color: #000000af;
 	}
 
@@ -24,9 +31,11 @@
 		font-family: monospace;
 		font-size: 1rem;
 		cursor: pointer;
+		margin: 2vh 0;
 	}
 
 	.pageName:hover {
+		margin: 0.9rem 0;
 		color: grey;
 		font-family: monospace;
 		font-size: 1.1rem;
@@ -34,6 +43,7 @@
 	}
 
 	.more {
+		margin: 2vh 0;
 		color: silver;
 		font-family: monospace;
 		font-size: 1rem;
@@ -41,6 +51,7 @@
 	}
 
 	.more:hover {
+		margin: 0.9rem 0;
 		color: grey;
 		font-family: monospace;
 		font-size: 1.1rem;
