@@ -30,7 +30,6 @@
 	font-family: monospace;
 	font-size: 1rem;
 	cursor: pointer;
-	margin-right: 10vw;
 }
 
 @media only screen and (max-device-width: 768px) {
@@ -40,4 +39,27 @@
 	#tutoRestart p {
 		font-size: 1.8rem;
 	}
+}
+
+#containerRightNavBar {
+	display: flex;
+	flex-direction: row;
+	margin-right: 10vw;
+}
+
+#langSelectorContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-left: 3vw;
+}
+
+#langSelectorContainer p {
+	margin-left: 2vh;
+	padding: 0;
+}
+
+#langSelectorTextSelected {
+	color: purple !important;
 }

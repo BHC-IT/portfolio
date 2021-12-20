@@ -192,6 +192,7 @@ class Pages {
 		this.i = 0;
 		this._more = false;
 
+		this.onclickbtn = this.onclickbtn.bind(this);
 		this.loadPages = this.loadPages.bind(this);
 		this.next = this.next.bind(this);
 		this.prev = this.prev.bind(this);
@@ -201,6 +202,50 @@ class Pages {
 		this.render = this.render.bind(this);
 
 		this.tuto = tuto;
+
+		this.displayBtnMore = false;
+		this.pageAnchor.onmousemove = event => {
+			if (findPageContent(this.pages[this.i].name).more) {
+				if(!this.displayBtnMore) {
+					this.pageAnchor.innerHTML += `
+						<div id="btnMore">
+							<p id="txtBtnMore">></p>
+						</div>
+						<style type="text/css">
+							#btnMore {
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								position: fixed;
+								height: 100vh;
+								width: 5vw;
+								right: 0;
+								cursor: pointer;
+								background: none;
+							}
+							#btnMore:hover {
+								background: linear-gradient(to right, rgba(0,0,0,0) 0%, #080808af 50%, #080808af 100%);
+							}
+							#txtBtnMore {
+								color: white;
+								font-size: 2rem;
+								font-weight: lighter;
+							}
+						</style>
+					`;
+
+					const btnMore = document.getElementById("btnMore")
+
+					btnMore.onclick = this.onclickbtn;
+
+					this.displayBtnMore = true;
+				}
+			}
+		}
+	}
+
+	onclickbtn() {
+		pageRight(this)
 	}
 
 	async loadPages() {
@@ -209,66 +254,47 @@ class Pages {
 
 			this.pages[0] = {};
 			this.pages[0].name = 'Home';
-			this.pages[0].page = await loadPage('/Pages/screens/landing.html');
-			this.pages[0]._more = null;
 			this.pages[0].colorDot = interpolateBHC;
 			this.pages[0].colorLine = interpolateBHCLine;
 
 			this.pages[1] = {};
 			this.pages[1].name = 'Dosismart';
-			this.pages[1].page = await loadPage('/Pages/screens/Dosismart.html');
-			this.pages[1]._more = await loadPage('/Pages/screens/Dosismart_more.html');
 			this.pages[1].colorDot = interpolateDosismart;
 			this.pages[1].colorLine = interpolateDosismartLine;
 
 			this.pages[2] = {};
 			this.pages[2].name = 'Auth API';
-			this.pages[2].page = await loadPage('/Pages/screens/BhcAuth.html');
-			this.pages[2]._more = await loadPage('/Pages/screens/BhcAuth_more.html');
 			this.pages[2].colorDot = interpolateAuthAPI;
 			this.pages[2].colorLine = interpolateAuthAPILine;
 
 			this.pages[3] = {};
 			this.pages[3].name = 'BKC';
-			this.pages[3].page = await loadPage('/Pages/screens/BKC.html');
-			this.pages[3]._more = await loadPage('/Pages/screens/BKC_more.html');
 			this.pages[3].colorDot = interpolateBKC;
 			this.pages[3].colorLine = interpolateBKCLine;
 
 
 			this.pages[4] = {};
 			this.pages[4].name = 'Arya mobile App';
-			this.pages[4].page = await loadPage('/Pages/screens/Arya.html');
-			this.pages[4]._more = await loadPage('/Pages/screens/Arya_more.html');
 			this.pages[4].colorDot = interpolateArya;
 			this.pages[4].colorLine = interpolateAryaLine;
 
-
 			this.pages[5] = {};
 			this.pages[5].name = 'BLC - BFC';
-			this.pages[5].page = await loadPage('/Pages/screens/BLC_BFC.html');
-			this.pages[5]._more = await loadPage('/Pages/screens/BLC_BFC_more.html');
 			this.pages[5].colorDot = interpolateBLC;
 			this.pages[5].colorLine = interpolateBLCLine;
 
 			this.pages[6] = {};
 			this.pages[6].name = 'Project : Automated distribution';
-			this.pages[6].page = await loadPage('/Pages/screens/ServerScalability.html');
-			this.pages[6]._more = await loadPage('/Pages/screens/ServerScalability_more.html');
 			this.pages[6].colorDot = interpolateScalability;
 			this.pages[6].colorLine = interpolateScalabilityLine;
 
 			this.pages[7] = {};
 			this.pages[7].name = 'In Dev : J4';
-			this.pages[7].page = await loadPage('/Pages/screens/J4.html');
-			this.pages[7]._more = await loadPage('/Pages/screens/J4_more.html');
 			this.pages[7].colorDot = interpolateJ4;
 			this.pages[7].colorLine = interpolateJ4Line;
 
 			this.pages[8] = {};
 			this.pages[8].name = 'Contact';
-			this.pages[8].page = await loadPage('/Pages/screens/Contact.html');
-			this.pages[8]._more = null;
 			this.pages[8].colorDot = interpolateContact;
 			this.pages[8].colorLine = interpolateContactLine;
 
@@ -278,23 +304,26 @@ class Pages {
 	}
 
 	next() {
+		this.displayBtnMore = false;
 		this._more = false;
 		this.i++;
 	}
 
 	prev() {
+		this.displayBtnMore = false;
 		this._more = false;
 		this.i--;
 	}
 
 	more() {
-		if (this._more || !this.pages[this.i]._more) return false;
+		if (this._more || !findPageContent(this.pages[this.i].name).more) return false;
 
 		this._more = true;
 		return true;
 	}
 
 	less() {
+		this.displayBtnMore = false;
 		if (!this._more) return false;
 		this._more = false;
 
@@ -307,10 +336,30 @@ class Pages {
 		this.pageAnchor.style.display = 'none';
 	}
 
+	displayNormalPage(urlImg, content) {
+		return (`
+			<div id="mainSpace" >
+				<img src=${urlImg} class="illustration" alt="DosismartLogo">
+				<div class="textSpace" >
+					${content}
+				</div>
+			</div>
+		`)
+	}
+
+	displayMorePage(content) {
+		return (`
+			<div id="mainSpaceMore" >
+				${content}
+			</div>
+		`)
+	}
+
 	render() {
+		let pageContent = findPageContent(this.pages[this.i].name);
 		this.pageAnchor.style.display = 'flex';
-		if (this._more) this.pageAnchor.innerHTML = this.pages[this.i]._more;
-		else this.pageAnchor.innerHTML = this.pages[this.i].page;
+		if (this._more) this.pageAnchor.innerHTML = this.displayMorePage(pageContent.more);
+		else this.pageAnchor.innerHTML = this.displayNormalPage(pageContent.urlImg, pageContent.normal);
 		cloud.color_dot = this.pages[this.i].colorDot;
 		cloud.color_line = this.pages[this.i].colorLine;
 		this.tuto.mount();
@@ -530,6 +579,9 @@ async function initPaginer() {
 
 		startText(initPaginer, true);
 	};
+
+	const test2 = document.getElementById('langSelectorText');
+	test2.onclick = switchLang;
 };
 
 pagesReady = true;
