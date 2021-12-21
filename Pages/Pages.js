@@ -263,7 +263,7 @@ class Pages {
 			this.pages[1].colorLine = interpolateDosismartLine;
 
 			this.pages[2] = {};
-			this.pages[2].name = 'Auth API';
+			this.pages[2].name = 'Auth';
 			this.pages[2].colorDot = interpolateAuthAPI;
 			this.pages[2].colorLine = interpolateAuthAPILine;
 
@@ -274,22 +274,22 @@ class Pages {
 
 
 			this.pages[4] = {};
-			this.pages[4].name = 'Arya mobile App';
+			this.pages[4].name = 'Arya';
 			this.pages[4].colorDot = interpolateArya;
 			this.pages[4].colorLine = interpolateAryaLine;
 
 			this.pages[5] = {};
-			this.pages[5].name = 'BLC - BFC';
+			this.pages[5].name = 'BLC-BFC';
 			this.pages[5].colorDot = interpolateBLC;
 			this.pages[5].colorLine = interpolateBLCLine;
 
 			this.pages[6] = {};
-			this.pages[6].name = 'Project : Automated distribution';
+			this.pages[6].name = 'Distribution';
 			this.pages[6].colorDot = interpolateScalability;
 			this.pages[6].colorLine = interpolateScalabilityLine;
 
 			this.pages[7] = {};
-			this.pages[7].name = 'In Dev : J4';
+			this.pages[7].name = 'J4';
 			this.pages[7].colorDot = interpolateJ4;
 			this.pages[7].colorLine = interpolateJ4Line;
 
