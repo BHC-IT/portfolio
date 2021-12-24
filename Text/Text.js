@@ -37,25 +37,25 @@ function mobileText(callback, skip) {
 	nextButton.style.display = 'none';
 
 	const welcomeText = new progressiveText({
-		text: 'Welcome',
+		text: getGoodTxts().tuto.welcomeText,
 		time: 500,
 		space: textZone,
 	});
 
 	const moveText = new progressiveText({
-		text: 'You can swipe up or down to go from one project to another',
+		text: getGoodTxts().tuto.moveText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const moreText = new progressiveText({
-		text: 'If a project interests you, swipe left to learn more',
+		text: getGoodTxts().tuto.moreText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const backText = new progressiveText({
-		text: 'Swipe right to go back',
+		text: getGoodTxts().tuto.backText,
 		time: 1000,
 		space: textZone,
 	});
@@ -204,25 +204,25 @@ function desktopText(callback, skip) {
 	nextButton.style.display = 'none';
 
 	const welcomeText = new progressiveText({
-		text: 'Welcome',
+		text: getGoodTxts().tuto.welcomeText,
 		time: 500,
 		space: textZone,
 	});
 
 	const moveText = new progressiveText({
-		text: 'You can use up and down key or scroll to go from one project to another',
+		text: getGoodTxts().tuto.moveText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const moreText = new progressiveText({
-		text: 'If a project interests you, use the right key to learn more',
+		text: getGoodTxts().tuto.moreText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const backText = new progressiveText({
-		text: 'Use the left key to go back',
+		text: getGoodTxts().tuto.backText,
 		time: 1000,
 		space: textZone,
 	});

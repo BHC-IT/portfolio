@@ -110,6 +110,12 @@ const txtsFR = {
 				<p>On our <a href="https://github.com/BHC-IT" style="color:grey">GitHub</a></p>`,
 			more: null},
 	],
+	tuto: {
+		welcomeText: 'Bienvenue',
+		moveText: `Vous pouvez utiliser les flèches du haut et du bas pour naviger d'un projet à un autre`,
+		moreText: 'If a project interests you, use the right key to learn more',
+		backText: 'Use the left key to go back',
+	},
 }
 
 const txtsEN = {
@@ -204,6 +210,12 @@ const txtsEN = {
 				<p>On our <a href="https://github.com/BHC-IT" style="color:grey">GitHub</a></p>`,
 			more: null},
 	],
+	tuto: {
+		welcomeText: 'Welcome',
+		moveText: 'You can use up and down key or scroll to go from one project to another',
+		moreText: 'If a project interests you, use the right key to learn more',
+		backText: 'Use the left key to go back',
+	},
 }
 
 const getGoodTxts = () => getLangue() === 'Fr' ? txtsFR : txtsEN;
