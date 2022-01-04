@@ -205,7 +205,12 @@ class Pages {
 
 		this.displayBtnMore = false;
 		this.pageAnchor.onmousemove = event => {
+			//console.log(!findPageContent(this.pages[this.i].name).more)
+			//console.log(this.pages[this.i].name)
+			//console.log(this.i)
 			if (findPageContent(this.pages[this.i].name).more) {
+				console.log("here")
+				console.log(this.displayBtnMore)
 				if(!this.displayBtnMore) {
 					this.pageAnchor.innerHTML += `
 						<div id="btnMore">
@@ -245,6 +250,7 @@ class Pages {
 	}
 
 	onclickbtn() {
+		this.displayBtnMore = false;
 		pageRight(this)
 	}
 
@@ -334,6 +340,7 @@ class Pages {
 		this.tuto.unmount();
 		this.pageAnchor.innerHTML = '';
 		this.pageAnchor.style.display = 'none';
+		this.displayBtnMore = false;
 	}
 
 	displayNormalPage(urlImg, content) {

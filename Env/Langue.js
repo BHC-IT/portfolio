@@ -1,4 +1,4 @@
-let langue = 'Fr'
+let langue = !navigator.language ? 'Fr' : navigator.language === 'fr' ? 'Fr' : 'En';
 
 const getLangue = () => langue;
 const setLangue = (newLangue) => {
@@ -52,7 +52,7 @@ const txtsFR = {
 				<p>Built with TypeScript and mongoDB, the API offers a fast and scalable way to sign-in user. OAuth2 is currently the only protocol supported, but more are to come.</p>
 				<p>Tests, linting, deployment and feedback are entirely automated with GitHub actions. Regressions or potential failures can't go unnoticed.</p>
 				<p>A configuration file can be given to set-up each node in a specific way. Furthermore, most features can have their rules overloaded by another service for specific needs.</p>`},
-		{name: 'BKC',		urlImg: './Assets/Images/Blockchain.png',
+		{name: 'BKC',		urlImg: './Assets/Images/Blockchain.svg',
 			title: 'BKC',
 			normal: `<p >BKC is a high velocity blockchain software develop for Monkey Money.</p>`,
 			more:
@@ -152,7 +152,7 @@ const txtsEN = {
 				<p>Built with TypeScript and mongoDB, the API offers a fast and scalable way to sign-in user. OAuth2 is currently the only protocol supported, but more are to come.</p>
 				<p>Tests, linting, deployment and feedback are entirely automated with GitHub actions. Regressions or potential failures can't go unnoticed.</p>
 				<p>A configuration file can be given to set-up each node in a specific way. Furthermore, most features can have their rules overloaded by another service for specific needs.</p>`},
-		{name: 'BKC',		urlImg: './Assets/Images/Blockchain.png',
+		{name: 'BKC',		urlImg: './Assets/Images/Blockchain.svg',
 			title: 'BKC',
 			normal: `<p >BKC is a high velocity blockchain software develop for Monkey Money.</p>`,
 			more:
