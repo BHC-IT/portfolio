@@ -150,7 +150,7 @@ class Cloud {
 			const zMatrix2R = [Math.sin(z_angle), Math.cos(z_angle), 0];
 			const zMatrix3R = [0, 0, 1];
 
-			const newCoord = [
+			let newCoord = [
 				point[0] - width / 2,
 				point[1] - height / 2,
 				point[2] - deep / 2,
