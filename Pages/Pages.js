@@ -203,48 +203,10 @@ class Pages {
 
 		this.tuto = tuto;
 
-		this.displayBtnMore = false;
 		this.pageAnchor.onmousemove = event => {
-			//console.log(!findPageContent(this.pages[this.i].name).more)
-			//console.log(this.pages[this.i].name)
-			//console.log(this.i)
-			if (findPageContent(this.pages[this.i].name).more) {
-				console.log("here")
-				console.log(this.displayBtnMore)
-				if(!this.displayBtnMore) {
-					this.pageAnchor.innerHTML += `
-						<div id="btnMore">
-							<p id="txtBtnMore">></p>
-						</div>
-						<style type="text/css">
-							#btnMore {
-								display: flex;
-								justify-content: center;
-								align-items: center;
-								position: fixed;
-								height: 100vh;
-								width: 5vw;
-								right: 0;
-								cursor: pointer;
-								background: none;
-							}
-							#btnMore:hover {
-								background: linear-gradient(to right, rgba(0,0,0,0) 0%, #080808af 50%, #080808af 100%);
-							}
-							#txtBtnMore {
-								color: white;
-								font-size: 2rem;
-								font-weight: lighter;
-							}
-						</style>
-					`;
-
-					const btnMore = document.getElementById("btnMore")
-
-					btnMore.onclick = this.onclickbtn;
-
-					this.displayBtnMore = true;
-				}
+			if (findPageContent(this.pages[this.i].name).more && this.btnMore) {
+				this.btnMore.style.display = 'flex';
+				this.btnMore.onclick = this.onclickbtn;
 			}
 		}
 	}
@@ -310,13 +272,11 @@ class Pages {
 	}
 
 	next() {
-		this.displayBtnMore = false;
 		this._more = false;
 		this.i++;
 	}
 
 	prev() {
-		this.displayBtnMore = false;
 		this._more = false;
 		this.i--;
 	}
@@ -329,7 +289,6 @@ class Pages {
 	}
 
 	less() {
-		this.displayBtnMore = false;
 		if (!this._more) return false;
 		this._more = false;
 
@@ -340,7 +299,6 @@ class Pages {
 		this.tuto.unmount();
 		this.pageAnchor.innerHTML = '';
 		this.pageAnchor.style.display = 'none';
-		this.displayBtnMore = false;
 	}
 
 	displayNormalPage(urlImg, content) {
@@ -351,6 +309,30 @@ class Pages {
 					${content}
 				</div>
 			</div>
+			<div id="btnMore">
+				<p id="txtBtnMore">></p>
+			</div>
+			<style type="text/css">
+				#btnMore {
+					display: none;
+					justify-content: center;
+					align-items: center;
+					position: fixed;
+					height: 100vh;
+					width: 5vw;
+					right: 0;
+					cursor: pointer;
+					background: none;
+				}
+				#btnMore:hover {
+					background: linear-gradient(to right, rgba(0,0,0,0) 0%, #080808af 50%, #080808af 100%);
+				}
+				#txtBtnMore {
+					color: white;
+					font-size: 2rem;
+					font-weight: lighter;
+				}
+			</style>
 		`)
 	}
 
@@ -370,6 +352,7 @@ class Pages {
 		cloud.color_dot = this.pages[this.i].colorDot;
 		cloud.color_line = this.pages[this.i].colorLine;
 		this.tuto.mount();
+		this.btnMore = document.getElementById('btnMore');
 	}
 }
 
