@@ -93,6 +93,7 @@
 <script src="/Pages/Tuto.js"></script>
 <script src="/Pages/Roulette.js"></script>
 <script src="/Pages/Pages.js"></script>
+<script src="/Env/Langue.js"></script>
 
 <script type="text/javascript">
 
@@ -106,66 +107,77 @@
 
 let rotating = false;
 
+function setInnerHTML() {
+	if (window.mobileCheck()) {
+		inner.innerHTML = `
+			<canvas id="canvas">
+			</canvas>
+
+			<div class="tutoArea" id="tutoArea" >
+				<div class="textZone" >
+				</div>
+				<div class="ButtonKeyboardShow" id="ButtonKeyboardZone" >
+					<img height="82.5" width="50" src='./Assets/Images/hand-click.png' class="buttonKey" id="hand" >
+				</div>
+				<div class="NextButton" >
+					<div id="nextButtonTouchable" >
+						<p>Next</p>
+					</div>
+				</div>
+			</div>
+			<div class="pageArea" id="tutoRestart" >
+				<img src='./Assets/Images/logo_BHC.png' style="height:5vh; margin-left:10vw" alt="bhcLogo">
+				<p id="restartText" >Show tutorial</p>
+			</div>
+			<div class="pageArea" id="pageArea" ></div>
+			<div class="pageArea" id="rollerArea" ></div>
+		`
+	} else {
+		inner.innerHTML = `
+			<canvas id="canvas">
+			</canvas>
+
+			<div class="tutoArea" id="tutoArea" >
+				<div class="textZone" >
+				</div>
+				<div class="ButtonKeyboardShow" id="ButtonKeyboardZone" >
+					<div class="ButtonRow">
+						<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-up.png' class="buttonKey" id="up" >
+					</div>
+					<div class="ButtonRow">
+						<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-left.png' class="buttonKey" id="left">
+						<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-down.png' class="buttonKey" id="down">
+						<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-right.png' class="buttonKey" id="right">
+					</div>
+				</div>
+				<div class="NextButton" >
+					<div id="nextButtonTouchable" >
+						<p>Next</p>
+					</div>
+				</div>
+			</div>
+			<div class="pageArea" id="tutoRestart" >
+				<img src='./Assets/Images/logo_BHC.png' style="height:5vh; margin-left:10vw" alt="bhcLogo">
+				<div id="containerRightNavBar">
+					<p id="restartText" >${getLangue() === 'Fr' ? 'Montrer le tutoriel' : 'Show tutorial'}</p>
+					<div id="langSelectorContainer">
+						<p id="${getLangue() === 'Fr' ? 'langSelectorTextSelected' : 'langSelectorText'}" >Fr</p>
+						<p id="${getLangue() === 'En' ? 'langSelectorTextSelected' : 'langSelectorText'}" >En</p>
+					</div>
+				</div>
+			</div>
+			<div class="pageArea" id="pageArea" ></div>
+			<div class="pageArea" id="rollerArea" ></div>
+		`
+	}
+}
+
 function waitReady() {
 	if (canvasReady && textReady && pagesReady) {
 
 		loading.style.height = '0px';
 
-		if (window.mobileCheck()) {
-			inner.innerHTML = `
-				<canvas id="canvas">
-				</canvas>
-
-				<div class="tutoArea" id="tutoArea" >
-					<div class="textZone" >
-					</div>
-					<div class="ButtonKeyboardShow" id="ButtonKeyboardZone" >
-						<img height="82.5" width="50" src='./Assets/Images/hand-click.png' class="buttonKey" id="hand" >
-					</div>
-					<div class="NextButton" >
-						<div id="nextButtonTouchable" >
-							<p>Next</p>
-						</div>
-					</div>
-				</div>
-				<div class="pageArea" id="tutoRestart" >
-					<p id="restartText" >Show tutoriel</p>
-				</div>
-				<div class="pageArea" id="pageArea" ></div>
-				<div class="pageArea" id="rollerArea" ></div>
-			`
-		} else {
-			inner.innerHTML = `
-				<canvas id="canvas">
-				</canvas>
-
-				<div class="tutoArea" id="tutoArea" >
-					<div class="textZone" >
-					</div>
-					<div class="ButtonKeyboardShow" id="ButtonKeyboardZone" >
-						<div class="ButtonRow">
-							<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-up.png' class="buttonKey" id="up" >
-						</div>
-						<div class="ButtonRow">
-							<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-left.png' class="buttonKey" id="left">
-							<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-down.png' class="buttonKey" id="down">
-							<img height="50" width="50" src='./Assets/Images/keyboard-key-arrow-right.png' class="buttonKey" id="right">
-						</div>
-					</div>
-					<div class="NextButton" >
-						<div id="nextButtonTouchable" >
-							<p>Next</p>
-						</div>
-					</div>
-				</div>
-				<div class="pageArea" id="tutoRestart" >
-					<p id="restartText" >Show tutoriel</p>
-				</div>
-				<div class="pageArea" id="pageArea" ></div>
-				<div class="pageArea" id="rollerArea" ></div>
-			`
-		}
-
+		setInnerHTML();
 
 		startCanvas();
 

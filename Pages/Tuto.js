@@ -1,6 +1,6 @@
 class Tuto {
 	constructor() {
-		this.pageAnchor = document.getElementById('tutoRestart');
+		this.pageAnchor = document.getElementById('restartText');
 		this.text = document.getElementById('restartText');
 
 		this.unmount = this.unmount.bind(this);

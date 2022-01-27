@@ -1,36 +1,55 @@
-#mainSpace {
-	height: 100%;
-	width: 100%;
+#mainSpace,
+#mainSpaceMore {
+	height: 65%;
 	display: flex;
 	flex-direction: column;
+	background-color: #080808af;
+	border-radius: 6px;
+	padding-top: 2vh;
+	padding-bottom: 2vh;
+	padding-left: 1vw;
+}
+
+#mainSpace {
+	width: 33%;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-between;
+}
+
+#mainSpaceMore {
+	width: 65%;
+	margin-left: 30%;
+}
+
+.illustration {
+	z-index: 255;
+	height: 20vh;
+	width: 20vh;
+	animation: enter 0.5s ease-in-out;
 }
 
 .textSpace {
-	position: absolute;
-	height: 50%;
-	width: 100%;
-
-	top: 50vh;
-
-	background-color: #080808af;
-
+	height: 45vh;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	animation: enter 0.5s ease-in-out;
 }
 
-.textSpace p {
+.textSpace p,
+#mainSpaceMore p {
 	color: #c0c0c0;
-
-	padding-right: 10vw;
-	padding-left: 10vw;
-
 	font-family: Comfortaa-light;
-	font-size: 1.1rem;
+	font-size: 1.2rem;
+	margin: 1vh 0;
+}
+
+.separatorMore {
+	height: 1px;
+	width: 50%;
+	background-color: #c0c0c0;
+	margin: 5vh 0;
 }
 
 @keyframes enter {

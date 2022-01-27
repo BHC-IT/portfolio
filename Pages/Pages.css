@@ -15,12 +15,13 @@
 }
 
 #tutoRestart {
-	display: none;
+	display: flex;
 	z-index: 10;
 	position: absolute;
-	left: 75vw;
-	top: 0.1vh;
+	width: 100%;
 	background-color: #000000af;
+	justify-content: space-between;
+	align-items: center;
 }
 
 #tutoRestart p {
@@ -38,4 +39,27 @@
 	#tutoRestart p {
 		font-size: 1.8rem;
 	}
+}
+
+#containerRightNavBar {
+	display: flex;
+	flex-direction: row;
+	margin-right: 10vw;
+}
+
+#langSelectorContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-left: 3vw;
+}
+
+#langSelectorContainer p {
+	margin-left: 2vh;
+	padding: 0;
+}
+
+#langSelectorTextSelected {
+	color: purple !important;
 }
