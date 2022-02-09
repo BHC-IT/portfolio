@@ -64,16 +64,16 @@
 }
 
 @media only screen and (max-device-width: 768px) {
+	#mainSpace, #mainSpaceMore {
+		width: 45vw;
+		position:  absolute;
+		right: 10vw;
+	}
 	#mainSpace img {
 		top: 40vh;
 	}
 
 	#mainSpace .textSpace {
-		position: absolute;
-		height: 30%;
-		width: 100%;
-
-		top: 70vh;
 
 		background-color: #080808af;
 
@@ -84,14 +84,15 @@
 		animation: enter 0.5s ease-in-out;
 	}
 
-	#mainSpace .textSpace p {
+	#mainSpace .textSpace p,
+	#mainSpaceMore p {
 		color: #c0c0c0;
 
-		padding-right: 10vw;
-		padding-left: 10vw;
+		padding-right: 2vw;
+		padding-left: 2vw;
 
 		font-family: Comfortaa-light;
-		font-size: 1.7rem;
+		font-size: 1.5rem;
 	}
 
 	#mainSpace #textSpaceLeft p {

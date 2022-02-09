@@ -112,7 +112,7 @@ const txtsFR = {
 	],
 	tuto: {
 		welcomeText: 'Bienvenue',
-		moveText: `Vous pouvez utiliser les flèches du haut et du bas pour naviger d'un projet à un autre`,
+		moveText: `Vous pouvez utiliser les flèches du haut et du bas (swipe sur mobile) pour naviger d'un projet à un autre`,
 		moreText: 'If a project interests you, use the right key to learn more',
 		backText: 'Use the left key to go back',
 	},
@@ -183,7 +183,7 @@ const txtsEN = {
 				<p>bfc is a framework designed around the actor model. It offers a way to easily develop software with concurency and prevent mistake and errors like deadlock.</p>
 				<p>One goal of bfc is to streamline dependecies managment and docker into the build and run process, and offers different distribution algorithm preimplemented as modules.</p>`},
 		{name: 'Distribution',			urlImg: './Assets/Images/Cloud.png',
-			title: 'Project : Automated distribution',
+			title: 'Automated distribution',
 			normal: `<p>Our goal is to create a collection of tools that would allow replication and distribution.</p>`,
 			more:
 				`<p>We aim to provide easier way to distribute and handle large pool with efficient tools.</p>
@@ -212,7 +212,7 @@ const txtsEN = {
 	],
 	tuto: {
 		welcomeText: 'Welcome',
-		moveText: 'You can use up and down key or scroll to go from one project to another',
+		moveText: 'You can use up and down key or scroll (swipe on mobile) to go from one project to another',
 		moreText: 'If a project interests you, use the right key to learn more',
 		backText: 'Use the left key to go back',
 	},

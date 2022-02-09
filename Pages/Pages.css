@@ -34,7 +34,9 @@
 
 @media only screen and (max-device-width: 768px) {
 	#tutoRestart {
-		left: 75vw;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	#tutoRestart p {
 		font-size: 1.8rem;
