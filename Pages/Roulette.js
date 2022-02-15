@@ -114,7 +114,14 @@ class Roulette {
 				if (i > this.pages.i - 2 && i < this.pages.i + 2 || this.pages.i < 2 && i < 3 || this.pages.i > this.pages.pages.length - 1 && i >= this.pages.pages.length - 1) {
 					this.rouletteAnchor.innerHTML += `
 						<div class="pageHolder" >
-							<p id="${e.name}" class="pageName" >${findPageContent(e.name).title}${ findPageContent(this.pages.pages[i].name).more ? `<p id="${e.name}more" class="more" >${getLangue() === 'Fr' ? '/plus' : '/more'}</p>` : '' }</p>
+							<div>
+								<p id="${e.name}" class="pageName" >
+									${findPageContent(e.name).title}
+								</p>
+							</div>
+							<div>
+								${findPageContent(this.pages.pages[i].name).more ? `<p id="${e.name}more" class="more" >${getLangue() === 'Fr' ? '/plus' : '/more'}</p>` : '' }
+							</div>
 						</div>
 					`
 				}
@@ -124,7 +131,14 @@ class Roulette {
 				if (i > this.pages.i - 3 && i < this.pages.i + 3 || this.pages.i < 2 && i < 5 || this.pages.i > this.pages.pages.length - 3 && i >= this.pages.pages.length - 5) {
 					this.rouletteAnchor.innerHTML += `
 						<div class="pageHolder" >
-							<p id="${e.name}" class="pageName" >${findPageContent(e.name).title}${ findPageContent(this.pages.pages[i].name).more ? `<p id="${e.name}more" class="more" >${getLangue() === 'Fr' ? '/plus' : '/more'}</p>` : '' }</p>
+							<div>
+								<p id="${e.name}" class="pageName" >
+									${findPageContent(e.name).title}
+								</p>
+							</div>
+							<div>
+								${findPageContent(this.pages.pages[i].name).more ? `<p id="${e.name}more" class="more" >${getLangue() === 'Fr' ? '/plus' : '/more'}</p>` : '' }
+							</div>
 						</div>
 					`
 				}

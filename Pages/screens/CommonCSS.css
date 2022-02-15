@@ -7,25 +7,28 @@
 	border-radius: 6px;
 	padding-top: 2vh;
 	padding-bottom: 2vh;
-	padding-left: 1vw;
+	border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 #mainSpace {
 	width: 33%;
 	align-items: center;
 	justify-content: space-between;
+	animation: enter 0.5s ease-in-out;
 }
 
 #mainSpaceMore {
 	width: 65%;
 	margin-left: 30%;
+	padding-left: 2vw;
+	padding-right: 1vw;
 }
 
 .illustration {
 	z-index: 255;
 	height: 20vh;
 	width: 20vh;
-	animation: enter 0.5s ease-in-out;
+	margin-top: 8vh;
 }
 
 .textSpace {
@@ -34,7 +37,12 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
-	animation: enter 0.5s ease-in-out;
+	padding-left: 2vw;
+	padding-right: 1vw;
+}
+
+.textSpace h1 {
+	color: white;
 }
 
 .textSpace p,
@@ -81,7 +89,6 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		animation: enter 0.5s ease-in-out;
 	}
 
 	#mainSpace .textSpace p,

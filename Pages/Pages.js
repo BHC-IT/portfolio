@@ -304,7 +304,7 @@ class Pages {
 	displayNormalPage(urlImg, content) {
 		return (`
 			<div id="mainSpace" >
-				<img src=${urlImg} class="illustration" alt="DosismartLogo">
+				${urlImg !== '' ? `<img src=${urlImg} class="illustration" alt="DosismartLogo">` : null}
 				<div class="textSpace" >
 					${content}
 				</div>
@@ -336,10 +336,12 @@ class Pages {
 		`)
 	}
 
-	displayMorePage(content) {
+	displayMorePage() {
 		return (`
 			<div id="mainSpaceMore" >
-				${content}
+				<p class="textSpaceMore"></p>
+				<div class="separatorMore"></div>
+				<p class="textSpaceMore"></p>
 			</div>
 		`)
 	}
@@ -347,7 +349,23 @@ class Pages {
 	render() {
 		let pageContent = findPageContent(this.pages[this.i].name);
 		this.pageAnchor.style.display = 'flex';
-		if (this._more) this.pageAnchor.innerHTML = this.displayMorePage(pageContent.more);
+		if (this._more) {
+			this.pageAnchor.innerHTML = this.displayMorePage();
+			const textZoneMore1 = document.getElementsByClassName('textSpaceMore')[0];
+			const textZoneMore2 = document.getElementsByClassName('textSpaceMore')[1];
+			const textMore1 = new progressiveText({
+				text: pageContent.more[0],
+				time: 500,
+				space: textZoneMore1,
+			});
+			const textMore2 = new progressiveText({
+				text: pageContent.more[1],
+				time: 500,
+				space: textZoneMore2,
+			});
+			textMore1.write()
+			textMore1.onFinish = () => textMore2.write()
+		}
 		else this.pageAnchor.innerHTML = this.displayNormalPage(pageContent.urlImg, pageContent.normal);
 		cloud.color_dot = this.pages[this.i].colorDot;
 		cloud.color_line = this.pages[this.i].colorLine;
