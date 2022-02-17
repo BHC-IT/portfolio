@@ -58,7 +58,7 @@ const txtsFR = {
 		},
 		{name: 'BKC',		urlImg: './Assets/Images/Blockchain.svg',
 			title: 'BKC',
-			normal: `<p >BKC is a high velocity blockchain software develop for Monkey Money.</p>`,
+			normal: `<p >BKC is a high velocity blockchain software develope for Monkey Money.</p>`,
 			more: [
 				`BKC was built for Monkey Money. The goal was to give french local currencies associations the ability to digitalise their money.
 				The association owners needed to run the chaine nodes on cheap machines, and could register huge spike on specific days without the possibility to scale. We thinked BKC just for that, beeing as low consuming as possible while handling large amounts of transactions at the same time.
