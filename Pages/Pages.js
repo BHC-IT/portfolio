@@ -374,6 +374,11 @@ class Pages {
 	}
 }
 
+function startExitAnimation() {
+	let mainSpaceContainer = document.getElementById("mainSpace") ?? document.getElementById("mainSpaceMore")
+	mainSpaceContainer.style.animation = 'exit 0.5s ease-in-out';
+}
+
 function startRotate(angle) {
 	roulette.render();
 	roulette.displaySelected();
@@ -397,65 +402,77 @@ const moving_factor = 0.02;
 
 function pageUp(pages) {
 	if (pages.i === 0) return;
+	startExitAnimation()
+	setTimeout(() => {
+		pages.unmount();
+		pages.prev();
+		startRotate([moving_factor, 0, 0]);
+
+		if (!rotating) {
+			setTimeout(() => {
+				rotating = false;
+				pages.render();
+			}, 2000);
+		}
+		rotating = true;
+	}, 500)
 
 
-	pages.unmount();
-	pages.prev();
-	startRotate([moving_factor, 0, 0]);
-
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
-	rotating = true;
 }
 
 function pageDown(pages) {
 	if (pages.i >= pages.pages.length - 1) return;
+	startExitAnimation()
+	setTimeout(() => {
 
-	pages.unmount();
-	pages.next();
-	startRotate([-moving_factor, 0, 0]);
+		pages.unmount();
+		pages.next();
+		startRotate([-moving_factor, 0, 0]);
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
-	rotating = true;
+		if (!rotating) {
+			setTimeout(() => {
+				rotating = false;
+				pages.render();
+			}, 2000);
+		}
+		rotating = true;
+	}, 500)
 }
 
 function pageLeft(pages) {
 	if (!pages.less()) return;
 
-	pages.unmount();
-	startRotate([0, moving_factor, 0]);
+	startExitAnimation()
+	setTimeout(() => {
+		pages.unmount();
+		startRotate([0, moving_factor, 0]);
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
-	rotating = true;
+		if (!rotating) {
+			setTimeout(() => {
+				rotating = false;
+				pages.render();
+			}, 2000);
+		}
+		rotating = true;
+	}, 500)
 }
 
 function pageRight(pages) {
 	if (!pages.more()) return;
 
-	pages.unmount();
-	startRotate([0, -moving_factor, 0]);
+	startExitAnimation()
+	setTimeout(() => {
+		pages.unmount();
+		startRotate([0, -moving_factor, 0]);
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
-	rotating = true;
+		if (!rotating) {
+			setTimeout(() => {
+				rotating = false;
+				pages.render();
+			}, 2000);
+		}
+		rotating = true;
+	}, 500)
 }
 
 function handleKeyDown(event) {

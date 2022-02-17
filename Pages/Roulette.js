@@ -127,7 +127,6 @@ class Roulette {
 				}
 			});
 		} else {
-			console.log("here")
 			this.pages.pages.forEach((e, i) => {
 				if (i > this.pages.i - 3 && i < this.pages.i + 3 || this.pages.i < 2 && i < 5 || this.pages.i > this.pages.pages.length - 3 && i >= this.pages.pages.length - 5) {
 					this.rouletteAnchor.innerHTML += `
