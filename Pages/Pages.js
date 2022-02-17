@@ -375,14 +375,15 @@ class Pages {
 }
 
 function startExitAnimation() {
-	let mainSpaceContainer = document.getElementById("mainSpace") ?? document.getElementById("mainSpaceMore")
-	mainSpaceContainer.style.animation = 'exit 0.5s ease-in-out';
+	if (!rotating) {
+		const mainSpaceContainer = document.getElementById("mainSpace") ?? document.getElementById("mainSpaceMore")
+		mainSpaceContainer.style.animation = 'exit 0.5s ease-in-out';
+	}
 }
 
 function startRotate(angle) {
-	roulette.render();
-	roulette.displaySelected();
-	if (!rotating) {
+	
+	if (true) {
 		cloud.angle = angle;
 		cloud.moveDot(false);
 //		setTimeout(() => {
@@ -403,54 +404,59 @@ const moving_factor = 0.02;
 function pageUp(pages) {
 	if (pages.i === 0) return;
 	startExitAnimation()
+	pages.prev();
+	roulette.render();
+	roulette.displaySelected();
+	if (rotating) return
 	setTimeout(() => {
 		pages.unmount();
-		pages.prev();
 		startRotate([moving_factor, 0, 0]);
 
-		if (!rotating) {
 			setTimeout(() => {
-				rotating = false;
 				pages.render();
+				rotating = false;
 			}, 2000);
-		}
 		rotating = true;
 	}, 500)
 
-
+	rotating = true;
 }
 
 function pageDown(pages) {
 	if (pages.i >= pages.pages.length - 1) return;
 	startExitAnimation()
+	pages.next();
+	roulette.render();
+	roulette.displaySelected();
+	if (rotating) return
 	setTimeout(() => {
 
 		pages.unmount();
-		pages.next();
 		startRotate([-moving_factor, 0, 0]);
 
-		if (!rotating) {
 			setTimeout(() => {
-				rotating = false;
 				pages.render();
+				rotating = false;
 			}, 2000);
-		}
 		rotating = true;
 	}, 500)
+	rotating = true;
 }
 
 function pageLeft(pages) {
 	if (!pages.less()) return;
 
 	startExitAnimation()
+	roulette.render();
+	roulette.displaySelected();
 	setTimeout(() => {
 		pages.unmount();
 		startRotate([0, moving_factor, 0]);
 
 		if (!rotating) {
 			setTimeout(() => {
-				rotating = false;
 				pages.render();
+				rotating = false;
 			}, 2000);
 		}
 		rotating = true;
@@ -461,14 +467,16 @@ function pageRight(pages) {
 	if (!pages.more()) return;
 
 	startExitAnimation()
+	roulette.render();
+	roulette.displaySelected();
 	setTimeout(() => {
 		pages.unmount();
 		startRotate([0, -moving_factor, 0]);
 
 		if (!rotating) {
 			setTimeout(() => {
-				rotating = false;
 				pages.render();
+				rotating = false;
 			}, 2000);
 		}
 		rotating = true;

@@ -137,8 +137,7 @@ const txtsEN = {
 		{name: 'Home',		urlImg: './Assets/Images/bhc_logo_1920.png',
 			title: 'Home',
 			normal:
-				`<p>ENGLICH VERSION !</p>
-				<p>Welcome. This site is a portfolio showing most of our previous and upcoming work.</p>
+				`<p>Welcome. This site is a portfolio showing most of our previous and upcoming work.</p>
 				<p>The site is built with vanilla HTML, CSS and JavaScript. With only one library for gpu rendering.</p>
 				<p>You can see the source code on <a href="https://github.com/BHC-IT/portfolio" style="color:grey" nofollow noreferee > GitHub</a>.</p>`,
 			more: null},
