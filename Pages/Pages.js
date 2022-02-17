@@ -257,7 +257,7 @@ class Pages {
 			this.pages[6].colorLine = interpolateScalabilityLine;
 
 			this.pages[7] = {};
-			this.pages[7].name = 'J4';
+			this.pages[7].name = 'Irie';
 			this.pages[7].colorDot = interpolateJ4;
 			this.pages[7].colorLine = interpolateJ4Line;
 
@@ -355,12 +355,12 @@ class Pages {
 			const textZoneMore2 = document.getElementsByClassName('textSpaceMore')[1];
 			const textMore1 = new progressiveText({
 				text: pageContent.more[0],
-				time: 500,
+				time: 250,
 				space: textZoneMore1,
 			});
 			const textMore2 = new progressiveText({
 				text: pageContent.more[1],
-				time: 500,
+				time: 250,
 				space: textZoneMore2,
 			});
 			textMore1.write()

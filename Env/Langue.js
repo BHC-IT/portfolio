@@ -103,18 +103,18 @@ const txtsFR = {
 				Many sdk and modules will be built to support any runtime or compiled language.`
 			]
 		},
-		{name: 'J4',		urlImg: './Assets/Images/j4.png',
-			title: 'En développement : J4',
+		{name: 'Irie',		urlImg: './Assets/Images/j4.png',
+			title: 'En développement : Irie',
 			normal: `<p>We are creating a new programing language.</p>`,
 			more: [
-				`J4 is a fonctionnal oriented language.
+				`Irie is a fonctionnal oriented language.
 				It is designed with regard of current language theory.`,
 
-				`J4 implements dependent sub typing.
+				`Irie implements dependent sub typing.
 				You can define arbitrary pieces of syntax with the use of mixfix expressions.`
 			]
 		},
-		{name: 'Contact',	urlImg: '',
+		{name: 'Contact',	urlImg: './Assets/Images/contact.png',
 			title: 'Contact',
 			normal:
 				`<p>Thank you for reading!</p>
@@ -172,7 +172,7 @@ const txtsEN = {
 		},
 		{name: 'BKC',		urlImg: './Assets/Images/Blockchain.svg',
 			title: 'BKC',
-			normal: `<p >BKC is a high velocity blockchain software develop for Monkey Money.</p>`,
+			normal: `<p >BKC is a high velocity blockchain software develope for Monkey Money.</p>`,
 			more: [
 				`BKC was built for Monkey Money. The goal was to give french local currencies associations the ability to digitalise their money.
 				The association owners needed to run the chaine nodes on cheap machines, and could register huge spike on specific days without the possibility to scale. We thinked BKC just for that, beeing as low consuming as possible while handling large amounts of transactions at the same time.
@@ -217,18 +217,18 @@ const txtsEN = {
 				Many sdk and modules will be built to support any runtime or compiled language.`
 			]
 		},
-		{name: 'J4',		urlImg: './Assets/Images/j4.png',
-			title: 'En développement : J4',
+		{name: 'Irie',		urlImg: './Assets/Images/j4.png',
+			title: 'En développement : Irie',
 			normal: `<p>We are creating a new programing language.</p>`,
 			more: [
-				`J4 is a fonctionnal oriented language.
+				`Irie is a fonctionnal oriented language.
 				It is designed with regard of current language theory.`,
 
-				`J4 implements dependent sub typing.
+				`Irie implements dependent sub typing.
 				You can define arbitrary pieces of syntax with the use of mixfix expressions.`
 			]
 		},
-		{name: 'Contact',	urlImg: '',
+		{name: 'Contact',	urlImg: './Assets/Images/contact.png',
 			title: 'Contact',
 			normal:
 				`<p>Thank you for reading!</p>
