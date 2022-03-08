@@ -257,7 +257,7 @@ class Pages {
 			this.pages[6].colorLine = interpolateScalabilityLine;
 
 			this.pages[7] = {};
-			this.pages[7].name = 'J4';
+			this.pages[7].name = 'Irie';
 			this.pages[7].colorDot = interpolateJ4;
 			this.pages[7].colorLine = interpolateJ4Line;
 
@@ -304,7 +304,7 @@ class Pages {
 	displayNormalPage(urlImg, content) {
 		return (`
 			<div id="mainSpace" >
-				<img src=${urlImg} class="illustration" alt="DosismartLogo">
+				${urlImg !== '' ? `<img src=${urlImg} class="illustration" alt="DosismartLogo">` : null}
 				<div class="textSpace" >
 					${content}
 				</div>
@@ -336,10 +336,12 @@ class Pages {
 		`)
 	}
 
-	displayMorePage(content) {
+	displayMorePage() {
 		return (`
 			<div id="mainSpaceMore" >
-				${content}
+				<p class="textSpaceMore"></p>
+				<div class="separatorMore"></div>
+				<p class="textSpaceMore"></p>
 			</div>
 		`)
 	}
@@ -347,7 +349,23 @@ class Pages {
 	render() {
 		let pageContent = findPageContent(this.pages[this.i].name);
 		this.pageAnchor.style.display = 'flex';
-		if (this._more) this.pageAnchor.innerHTML = this.displayMorePage(pageContent.more);
+		if (this._more) {
+			this.pageAnchor.innerHTML = this.displayMorePage();
+			const textZoneMore1 = document.getElementsByClassName('textSpaceMore')[0];
+			const textZoneMore2 = document.getElementsByClassName('textSpaceMore')[1];
+			const textMore1 = new progressiveText({
+				text: pageContent.more[0],
+				time: 250,
+				space: textZoneMore1,
+			});
+			const textMore2 = new progressiveText({
+				text: pageContent.more[1],
+				time: 250,
+				space: textZoneMore2,
+			});
+			textMore1.write()
+			textMore1.onFinish = () => textMore2.write()
+		}
 		else this.pageAnchor.innerHTML = this.displayNormalPage(pageContent.urlImg, pageContent.normal);
 		cloud.color_dot = this.pages[this.i].colorDot;
 		cloud.color_line = this.pages[this.i].colorLine;
@@ -356,10 +374,16 @@ class Pages {
 	}
 }
 
-function startRotate(angle) {
-	roulette.render();
-	roulette.displaySelected();
+function startExitAnimation() {
 	if (!rotating) {
+		const mainSpaceContainer = document.getElementById("mainSpace") ?? document.getElementById("mainSpaceMore")
+		mainSpaceContainer.style.animation = 'exit 0.5s ease-in-out';
+	}
+}
+
+function startRotate(angle) {
+	
+	if (true) {
 		cloud.angle = angle;
 		cloud.moveDot(false);
 //		setTimeout(() => {
@@ -379,65 +403,84 @@ const moving_factor = 0.02;
 
 function pageUp(pages) {
 	if (pages.i === 0) return;
-
-
-	pages.unmount();
+	startExitAnimation()
 	pages.prev();
-	startRotate([moving_factor, 0, 0]);
+	roulette.render();
+	roulette.displaySelected();
+	if (rotating) return
+	setTimeout(() => {
+		pages.unmount();
+		startRotate([moving_factor, 0, 0]);
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
+			setTimeout(() => {
+				pages.render();
+				rotating = false;
+			}, 2000);
+		rotating = true;
+	}, 500)
+
 	rotating = true;
 }
 
 function pageDown(pages) {
 	if (pages.i >= pages.pages.length - 1) return;
-
-	pages.unmount();
+	startExitAnimation()
 	pages.next();
-	startRotate([-moving_factor, 0, 0]);
+	roulette.render();
+	roulette.displaySelected();
+	if (rotating) return
+	setTimeout(() => {
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
+		pages.unmount();
+		startRotate([-moving_factor, 0, 0]);
+
+			setTimeout(() => {
+				pages.render();
+				rotating = false;
+			}, 2000);
+		rotating = true;
+	}, 500)
 	rotating = true;
 }
 
 function pageLeft(pages) {
 	if (!pages.less()) return;
 
-	pages.unmount();
-	startRotate([0, moving_factor, 0]);
+	startExitAnimation()
+	roulette.render();
+	roulette.displaySelected();
+	setTimeout(() => {
+		pages.unmount();
+		startRotate([0, moving_factor, 0]);
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
-	rotating = true;
+		if (!rotating) {
+			setTimeout(() => {
+				pages.render();
+				rotating = false;
+			}, 2000);
+		}
+		rotating = true;
+	}, 500)
 }
 
 function pageRight(pages) {
 	if (!pages.more()) return;
 
-	pages.unmount();
-	startRotate([0, -moving_factor, 0]);
+	startExitAnimation()
+	roulette.render();
+	roulette.displaySelected();
+	setTimeout(() => {
+		pages.unmount();
+		startRotate([0, -moving_factor, 0]);
 
-	if (!rotating) {
-		setTimeout(() => {
-			rotating = false;
-			pages.render();
-		}, 2000);
-	}
-	rotating = true;
+		if (!rotating) {
+			setTimeout(() => {
+				pages.render();
+				rotating = false;
+			}, 2000);
+		}
+		rotating = true;
+	}, 500)
 }
 
 function handleKeyDown(event) {

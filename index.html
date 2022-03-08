@@ -127,7 +127,13 @@ function setInnerHTML() {
 			</div>
 			<div class="pageArea" id="tutoRestart" >
 				<img src='./Assets/Images/logo_BHC.png' style="height:5vh; margin-left:10vw" alt="bhcLogo">
-				<p id="restartText" >Show tutorial</p>
+				<div id="containerRightNavBar">
+					<p id="restartText" >${getLangue() === 'Fr' ? 'Montrer le tutoriel' : 'Show tutorial'}</p>
+					<div id="langSelectorContainer">
+						<p id="${getLangue() === 'Fr' ? 'langSelectorTextSelected' : 'langSelectorText'}" >Fr</p>
+						<p id="${getLangue() === 'En' ? 'langSelectorTextSelected' : 'langSelectorText'}" >En</p>
+					</div>
+				</div>
 			</div>
 			<div class="pageArea" id="pageArea" ></div>
 			<div class="pageArea" id="rollerArea" ></div>

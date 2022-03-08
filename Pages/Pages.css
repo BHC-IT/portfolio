@@ -21,6 +21,7 @@
 	width: 100%;
 	background-color: #000000af;
 	justify-content: space-between;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	align-items: center;
 }
 
@@ -34,7 +35,9 @@
 
 @media only screen and (max-device-width: 768px) {
 	#tutoRestart {
-		left: 75vw;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	#tutoRestart p {
 		font-size: 1.8rem;
