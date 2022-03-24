@@ -20,7 +20,6 @@ class Roulette {
 
 			this.render();
 		})
-
 	}
 
 	handleclick(event) {

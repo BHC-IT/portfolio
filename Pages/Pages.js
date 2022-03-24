@@ -339,8 +339,10 @@ class Pages {
 	displayMorePage() {
 		return (`
 			<div id="mainSpaceMore" >
+				<p class="textSpaceMoreInvisible"></p>
 				<p class="textSpaceMore"></p>
-				<div class="separatorMore"></div>
+				<div class="separatorSpaceMore"></div>
+				<p class="textSpaceMoreInvisible"></p>
 				<p class="textSpaceMore"></p>
 			</div>
 		`)
@@ -364,7 +366,11 @@ class Pages {
 				space: textZoneMore2,
 			});
 			textMore1.write()
-			textMore1.onFinish = () => textMore2.write()
+			textMore1.onFinish = () => {
+				const separator = document.getElementsByClassName('separatorSpaceMore')[0];
+				separator.innerHTML=`<div class="separatorMore"></div>`
+				textMore2.write()
+			}
 		}
 		else this.pageAnchor.innerHTML = this.displayNormalPage(pageContent.urlImg, pageContent.normal);
 		cloud.color_dot = this.pages[this.i].colorDot;
@@ -382,7 +388,7 @@ function startExitAnimation() {
 }
 
 function startRotate(angle) {
-	
+
 	if (true) {
 		cloud.angle = angle;
 		cloud.moveDot(false);

@@ -37,7 +37,7 @@ const txtsFR = {
 				`Dosismart a été créé avec l’aide de <a href="https://dosimex.fr" style="color:grey">dosimex</a> qui nous a partagé ses calculs pour
 				le modèle physique nucléaire. Dosimex, en tant que software Excel est adopté sur son marché francais.
 				Dosismart vise a ajouter des fonctionnalités modernes: historique, import/export de données, groupes d’utilisateurs… etc.
-				C’est la première solution mobile qui modélize l’exposition aux rayons gamma.
+				C’est la première solution mobile qui modélise l’exposition aux rayons gamma.
 				L’application n’est actuellement disponible que par l’achat d’une clef Dosimex.`,
 
 				`Le projet est construit en architecture microservice. La plupart des services sont codés en Typescript avec des modules

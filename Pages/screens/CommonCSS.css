@@ -22,6 +22,7 @@
 	margin-left: 30%;
 	padding-left: 2vw;
 	padding-right: 1vw;
+	animation: enter 0.5s ease-in-out;
 }
 
 .illustration {
@@ -85,12 +86,14 @@
 
 @media only screen and (max-device-width: 768px) {
 	#mainSpace, #mainSpaceMore {
-		width: 45vw;
+		width: 80vw;
+		height: 70vh;
 		position:  absolute;
 		right: 10vw;
+		bottom: 5vh;
 	}
 	#mainSpace img {
-		top: 40vh;
+		top: 35vh;
 	}
 
 	#mainSpace .textSpace {
@@ -120,5 +123,9 @@
 
 	#mainSpace #textSpaceRight p {
 		font-size: 1.7rem;
+	}
+
+	.separatorMore {
+		margin: 1vh 0;
 	}
 }
