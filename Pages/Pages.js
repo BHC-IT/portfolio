@@ -574,6 +574,22 @@ function handleScroll(event) {
 	}
 }
 
+
+function launchTuto(document, roulette, pages) {
+	roulette.unmount();
+	pages.unmount();
+
+	document.removeEventListener('keydown', handleKeyDown);
+	document.removeEventListener('touchstart', handleTouchstart);
+	document.removeEventListener('touchmove', handleTouchmove);
+	document.removeEventListener('touchend', handleTouchend);
+
+	document.onwheel = () => { };
+
+
+	startText(initPaginer, true);
+};
+
 async function initPaginer() {
 
 	localStorage.setItem('tuto', 'done');
@@ -605,19 +621,7 @@ async function initPaginer() {
 	document.getElementsByClassName('tutoArea')[0].style.display = 'none';
 
 
-	tuto.pageAnchor.onclick = () => {
-		roulette.unmount();
-		pages.unmount();
-
-		document.removeEventListener('keydown', handleKeyDown);
-		document.removeEventListener('touchstart', handleTouchstart);
-		document.removeEventListener('touchmove', handleTouchmove);
-		document.removeEventListener('touchend', handleTouchend);
-
-		document.onwheel = () => {};
-
-		startText(initPaginer, true);
-	};
+	tuto.pageAnchor.onclick = () => launchTuto(document, roulette, pages);
 
 	const test2 = document.getElementById('langSelectorText');
 	test2.onclick = switchLang;

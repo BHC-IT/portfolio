@@ -16,7 +16,13 @@ const switchLang = () => {
 
 	const tutoTxtToChange = document.getElementById('restartText');
 	tutoTxtToChange.innerHTML = getLangue() === 'Fr' ? 'Montrer le tutoriel' : 'Show tutorial';
-	initPaginer();
+	const tutoArea = document.getElementById('tutoArea');
+	const isInTuto = tutoArea.style.display === 'flex'
+	if (isInTuto) {
+		currentTutoDisplay.switchLang();
+	} else {
+		initPaginer();
+	}
 }
 
 const txtsFR = {
@@ -260,6 +266,7 @@ const txtsEN = {
 }
 
 const getGoodTxts = () => getLangue() === 'Fr' ? txtsFR : txtsEN;
+const getBadTxts = () => getLangue() !== 'Fr' ? txtsFR : txtsEN;
 
 const findPageContent = (pageName) => {
 	let retour = null;

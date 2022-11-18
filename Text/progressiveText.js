@@ -1,8 +1,11 @@
 class progressiveText {
-	constructor({text, time, space}) {
+	constructor({text, textOther, time, space}) {
 
 		this.text = text;
+		this.textOther = textOther;
 		this.to_write = '';
+
+		this.have_switched = false;
 
 		this.time = time;
 		this.deltaTime = time / text.length;
@@ -23,6 +26,8 @@ class progressiveText {
 		this.baliseClose = '';
 		this.baliseBefore = '';
 		this.baliseContent = '';
+
+		this.finished = false;
 	}
 
 	isBalise() {
@@ -43,9 +48,6 @@ class progressiveText {
 			this.baliseContent = interBalise;
 			this.baliseBefore = this.text.slice(0, this.i)
 			this.baliseCloseEnd = this.i + idxCloseBF + baliseOuvrante.length
-			console.log(" this.baliseOpen:", this.baliseOpen)
-			console.log(" this.baliseClose:", this.baliseClose)
-			console.log(" this.baliseContent:", this.baliseContent)
 			return true
 		}
 		return false
@@ -60,8 +62,6 @@ class progressiveText {
 		for (let i = 0; i < this.baliseContent.length + 1; i++) {
 			setTimeout(() => renderACarac(i), this.deltaTime)
 		}
-		console.log("i :", this.i)
-		console.log("baliseCloseEnd :", this.baliseCloseEnd)
 		this.i = this.baliseCloseEnd
 		this.render()
 	}
@@ -69,18 +69,27 @@ class progressiveText {
 	render() {
 		if (this.isBalise()) {
 			this.renderBalise()
-			console.log("BALISE")
 		} else {
-			//console.log(this.i)
 			this.to_write += this.text[this.i];
-			//if (this.text[this.i] === "x")
-			//	console.log("towrite :", this.to_write)
 			this.space.innerHTML = `<p>${this.to_write}</p>`
 			this.i++;
 			if (this.i < this.text.length)
 				setTimeout(this.render, this.deltaTime);
-			else
+			else {
+				this.finished = true;
 				this.onFinish();
+			}
+		}
+	}
+
+	forceRerender() {
+		if (this.isBalise()) {
+		} else {
+			this.to_write = this.text.slice(0, this.i);
+			this.i = this.i > this.text.length ? this.text.length : this.i
+			this.space.innerHTML = `<p>${this.to_write}</p>`
+			if (this.finished && this.i < this.text.length)
+				this.render()
 		}
 	}
 
@@ -89,8 +98,18 @@ class progressiveText {
 	}
 
 	write() {
+		if (currentTutoDisplay.have_switched)
+			this.switchLang();
 		if (this.onStart)
 			this.onStart();
 		this.render();
+	}
+
+	switchLang() {
+		const tmp = this.textOther;
+		this.textOther = this.text;
+		this.text = tmp;
+		this.have_switched = !this.have_switched;
+		this.forceRerender();
 	}
 }

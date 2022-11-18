@@ -16,8 +16,6 @@ interpolateBHCLine = (e1, e2, {height, width}) => {
 	const value = e1[1] / height;
 	const distance = Math.sqrt( Math.pow(e1[0] - e2[0], 2) + Math.pow(e1[1] - e2[1], 2) + Math.pow(e1[2] - e2[2], 2))
 
-	if (e[0] < 50)
-		console.log("here");
 
 	return `rgba(${interpolate(0x31, 0x88, value)}, ${interpolate(0x91, 0x31, value)}, ${interpolate(0xcf, 0xb7, value)}, ${distance / 200})`;
 }

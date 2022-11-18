@@ -20,6 +20,8 @@ function startAnimation(hand, animation) {
 	});
 }
 
+let currentTutoDisplay = null;
+
 
 function mobileText(callback, skip) {
 	const textZone = document.getElementsByClassName('textZone')[0];
@@ -38,24 +40,29 @@ function mobileText(callback, skip) {
 
 	const welcomeText = new progressiveText({
 		text: getGoodTxts().tuto.welcomeText,
+		textOther: getBadTxts().tuto.welcomeText,
 		time: 500,
 		space: textZone,
 	});
+	currentTutoDisplay = welcomeText
 
 	const moveText = new progressiveText({
 		text: getGoodTxts().tuto.moveText,
+		textOther: getBadTxts().tuto.moveText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const moreText = new progressiveText({
 		text: getGoodTxts().tuto.moreText,
+		textOther: getBadTxts().tuto.moreText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const backText = new progressiveText({
 		text: getGoodTxts().tuto.backText,
+		textOther: getBadTxts().tuto.backText,
 		time: 1000,
 		space: textZone,
 	});
@@ -108,6 +115,7 @@ function mobileText(callback, skip) {
 			next.write();
 	}
 
+
 	welcomeText.onFinish = () => {
 		setTimeout(() => {
 			welcomeText.supp();
@@ -117,6 +125,7 @@ function mobileText(callback, skip) {
 	};
 
 	moveText.onStart = () => {
+		currentTutoDisplay = moreText
 		keyZone.style.display = 'block';
 		nextButton.style.display = 'block';
 
@@ -130,6 +139,7 @@ function mobileText(callback, skip) {
 	}
 
 	moreText.onStart = () => {
+		currentTutoDisplay = moreText
 		current = null;
 		next = null;
 
@@ -143,6 +153,7 @@ function mobileText(callback, skip) {
 	}
 
 	backText.onStart = () => {
+		currentTutoDisplay = backText
 		current = null;
 		next = null;
 
@@ -183,8 +194,13 @@ function mobileText(callback, skip) {
 	document.addEventListener('touchmove', handleTouchmove);
 	document.addEventListener('touchend', handleTouchend);
 
-	if (skip) moveText.write();
-	else setTimeout(() => welcomeText.write(), 750);
+	if (skip) {
+		currentTutoDisplay = moveText
+		moveText.write()
+	} else {
+		currentTutoDisplay = moveText
+		setTimeout(() => welcomeText.write(), 750);
+	}
 }
 
 function desktopText(callback, skip) {
@@ -205,30 +221,36 @@ function desktopText(callback, skip) {
 
 	const welcomeText = new progressiveText({
 		text: getGoodTxts().tuto.welcomeText,
+		textOther: getBadTxts().tuto.welcomeText,
 		time: 500,
 		space: textZone,
 	});
+	currentTutoDisplay = welcomeText
 
 	const moveText = new progressiveText({
 		text: getGoodTxts().tuto.moveText,
+		textOther: getBadTxts().tuto.moveText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const moreText = new progressiveText({
 		text: getGoodTxts().tuto.moreText,
+		textOther: getBadTxts().tuto.moreText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const backText = new progressiveText({
 		text: getGoodTxts().tuto.backText,
+		textOther: getBadTxts().tuto.backText,
 		time: 1000,
 		space: textZone,
 	});
 
 	const dummyEnd = new progressiveText({
 		text: ' ',
+		textOther: ' ',
 		time: 1,
 		space: textZone,
 	});
@@ -262,6 +284,7 @@ function desktopText(callback, skip) {
 	}
 
 	moreText.onStart = () => {
+		currentTutoDisplay = moreText
 		current = null;
 		next = null;
 
@@ -277,6 +300,7 @@ function desktopText(callback, skip) {
 	}
 
 	backText.onStart = () => {
+		currentTutoDisplay = backText
 		current = null;
 		next = null;
 
@@ -318,11 +342,24 @@ function desktopText(callback, skip) {
 	document.addEventListener('touchend', handleTouchend);
 
 
-	if (skip) moveText.write();
-	else setTimeout(() => welcomeText.write(), 750);
+	if (skip) {
+		currentTutoDisplay = moveText
+		moveText.write()
+	} else {
+		currentTutoDisplay = moveText
+		setTimeout(() => welcomeText.write(), 750);
+	}
 }
 
 function startText(callback, skip = false) {
+
+	document.getElementsByClassName('tutoArea')[0].style.display = 'flex';
+
+	if (window.mobileCheck()) mobileText(callback, skip);
+	else desktopText(callback, skip);
+}
+
+function refresh(callback, skip = false) {
 
 	document.getElementsByClassName('tutoArea')[0].style.display = 'flex';
 
