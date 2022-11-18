@@ -139,11 +139,11 @@ const txtsFR = {
 			more: null},
 	],
 	tuto: {
-		welcomeText: 'Welcome',
-		moveText: 'You can use up and down key or scroll (swipe on mobile) to go from one project to another',
-		moreText: 'If a project interests you, use the right key to learn more',
-		backText: 'Use the left key to go back',
-	},
+        welcomeText: 'Bienvenue',
+        moveText: 'Vous pouvez utiliser les flèches du haut et du bas (faire glisser sur mobile) pour naviguer d\'un projet à l\'autre',
+        moreText: 'Si un projet vous intéresse, utilisez la flèche de droite pour en apprendre un peu plus. N\'hésitez pas à nous contacter',
+        backText: 'Utilisez la flèche de gauche pour revenir',
+    },
 }
 
 const txtsEN = {
@@ -252,8 +252,8 @@ const txtsEN = {
 			more: null},
 	],
 	tuto: {
-		welcomeText: 'Bienvenue',
-		moveText: `Vous pouvez utiliser les flèches du haut et du bas (swipe sur mobile) pour naviger d'un projet à un autre`,
+		welcomeText: 'Welcome',
+		moveText: 'You can use up and down key or scroll (swipe on mobile) to go from one project to another',
 		moreText: 'If a project interests you, use the right key to learn more',
 		backText: 'Use the left key to go back',
 	},
