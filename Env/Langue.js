@@ -171,7 +171,7 @@ const txtsEN = {
 			]
 		},
 		{name: 'Auth',		urlImg: './Assets/Images/OAuth_logo.png',
-			title: `API d'authentification`,
+			title: `Authentication API`,
 			normal: `<p>Our Auth API provides fast and reliable authentication for end user or automated services.</p>`,
 			more: [
 				`The API is built with security and reliability in mind. Supporting a well-known protocol and following specification allows use to craft a service in wich you can be confident.
@@ -197,7 +197,7 @@ const txtsEN = {
 			]
 		},
 		{name: 'Arya',		urlImg: './Assets/Images/Arya_logo.png',
-			title: 'Application mobile Arya',
+			title: 'Mobile app Arya',
 			normal: `<p>Our first client ! Mobile App in react Native. We met Etienne, Nalyssa's Director, a company based in Jakarta with wich we collaborated on this project. We agreed on a mutally beneficial partenership because we loved working together.</p>`,
 			more: [
 				`Arya is a social application.
@@ -220,7 +220,7 @@ const txtsEN = {
 			]
 		},
 		{name: 'Distribution',			urlImg: './Assets/Images/Cloud.png',
-			title: 'Distribution automatique',
+			title: 'Automatic distribution',
 			normal: `<p>Our goal is to create a collection of tools that would allow replication and distribution.</p>`,
 			more: [
 				`We aim to provide easier way to distribute and handle large pool with efficient tools.
@@ -231,7 +231,7 @@ const txtsEN = {
 			]
 		},
 		{name: 'Irie',		urlImg: './Assets/Images/j4.png',
-			title: 'En développement : Irie',
+			title: 'In development : Irie',
 			normal: `<p>We are creating a new programing language.</p>`,
 			more: [
 				`Irie is a fonctionnal oriented language.
